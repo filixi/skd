@@ -106,7 +106,7 @@ class RegularControlState : IControlState
                 gc.SingleClickAt(up);
             }
 
-            Debug.Log("Start" + sample.First() + "Tick:" + sample.Count.ToString() + " v:" + speed.ToString());
+            // Debug.Log("Start" + sample.First() + "Tick:" + sample.Count.ToString() + " v:" + speed.ToString());
             sample.Clear();
         }
     }

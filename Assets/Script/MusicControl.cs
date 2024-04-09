@@ -40,9 +40,14 @@ public class MusicControl : MonoBehaviour
 
     private int GetIndex(Vector3 l)
     {
-        var index = Mathf.Clamp((int)Mathf.Floor(l.x / 4) + 3, 0, 4) + (l.z < 0 ? 5 : 0);
-        Debug.Log("MusicIndex: " + index);
-        return index;
+        float width = 6;
+        float length = 5;
+
+        var index = (int)Mathf.Floor((l.x + (width * length / 2)) / width);
+        var adj_index = Mathf.Clamp(index, 0, (int)length - 1) + (l.z < 0 ? (int)length : 0);
+
+        Debug.Log("MusicIndex: " + adj_index);
+        return adj_index;
     }
 
     public void SingleClickAt(Vector3 l)
