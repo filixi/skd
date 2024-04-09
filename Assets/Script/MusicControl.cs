@@ -1,6 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+public static class EnumerableExt
+{
+    public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
+    {
+        return list.Select(p => new { p, rank = UnityEngine.Random.Range(.1f, 1.0f) })
+            .OrderBy(x => x.rank)
+            .Select(x => x.p);
+    }
+}
 
 public class MusicControl : MonoBehaviour
 {
@@ -38,16 +49,32 @@ public class MusicControl : MonoBehaviour
             x.loop = true;
     }
 
+
+    CameraController cc;
+    Bounds? bound = null;
+    List<int> index_shuffle = new List<int>();
     private int GetIndex(Vector3 l)
     {
-        float width = 6;
-        float length = 5;
+        if (bound == null)
+        {
+            bound = GameObject.Find("MainCamera").GetComponent<CameraController>().GetCameraBounds();
+            index_shuffle = Enumerable.Range(0, 40).Select(i => i / 4).Shuffle().ToList();
+        }
 
-        var index = (int)Mathf.Floor((l.x + (width * length / 2)) / width);
-        var adj_index = Mathf.Clamp(index, 0, (int)length - 1) + (l.z < 0 ? (int)length : 0);
+        var x_span = bound.Value.max.x - bound.Value.min.x;
+        var z_span = bound.Value.max.z - bound.Value.min.z;
+
+        var x_length = x_span / 8;
+        var z_length = z_span / 5;
+
+        var adj_l = l - bound.Value.min;
+
+        var index = (adj_l.x / x_length) * 5 + (adj_l.z / z_length);
+
+        var adj_index = Mathf.Clamp((int)index, 0, index_shuffle.Count - 1);
 
         Debug.Log("MusicIndex: " + adj_index);
-        return adj_index;
+        return index_shuffle[adj_index];
     }
 
     public void SingleClickAt(Vector3 l)

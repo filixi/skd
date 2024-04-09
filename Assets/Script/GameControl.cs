@@ -164,7 +164,7 @@ public class GameControl : MonoBehaviour
     {
         control_state.UpdateState(cc, wi, this);
 
-        var tick = Mathf.RoundToInt(audio_source.time * 60);
+        var tick = Mathf.RoundToInt(audio_source.time * 120);
 
         if (tick % 15 == 0 || (tick + 1) % 15 == 0 || (tick - 1) % 15 == 0)
         {
