@@ -125,7 +125,7 @@ public class GameControl : MonoBehaviour
         AudioClip audioClip = Resources.Load<AudioClip>("SoundEffect/Level1");
         audio_source.clip = audioClip;
         audio_source.Play();
-        audio_source.volume = 1.0f;
+        audio_source.volume = 0.0f;
     }
 
     CameraController cc;
@@ -166,7 +166,7 @@ public class GameControl : MonoBehaviour
 
         var tick = Mathf.RoundToInt(audio_source.time * 120);
 
-        if (tick % 15 == 0 || (tick + 1) % 15 == 0 || (tick - 1) % 15 == 0)
+        if (tick % 1 == 0 || (tick + 1) % 15 == 0 || (tick - 1) % 15 == 0)
         {
             while (pending_single_click.Count > 0)
             {
