@@ -233,8 +233,8 @@ CameraController cc;
             //if (scheduled_user_input.Count <= 0)
             //    SingleClickAt(new Vector3(0, 0, 0));
 
-            //if (pending_user_input.Count <= 0)
-            //    SingleClickAt(new Vector3(0, 0, 0));
+            if (pending_user_input.Count <= 0)
+                SingleClickAt(new Vector3(0, 0, 0));
         }
 
         int position = 0;

@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000002A778D45998 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000021EA5EEF3C8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,3 +16,80 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] SoundI::release                          :  (0000021C617BF968)
+[LOG] SoundI::release                          :     test L (0000021DFE8B78A8)
+[LOG] SoundI::release                          :  (0000021ECA459718)
+[LOG] SoundI::release                          :     10 (0000021DAEE61BF8)
+[LOG] SoundI::release                          :  (0000021C617BFAD8)
+[LOG] SoundI::release                          :     9 (0000021DAEE61098)
+[LOG] SoundI::release                          :  (0000021ECA45A9C8)
+[LOG] SoundI::release                          :     2 (0000021DAEE606D8)
+[LOG] SoundI::release                          :  (0000021C617C0938)
+[LOG] SoundI::release                          :     3 (0000021DF3D778E8)
+[LOG] SoundI::release                          :  (0000021ECA459E48)
+[LOG] SoundI::release                          :     8 (0000021DAEE60BB8)
+[LOG] SoundI::release                          :  (0000021C617C0208)
+[LOG] SoundI::release                          :     7 (0000021DFE8B7A48)
+[LOG] SoundI::release                          :  (0000021ECA459B68)
+[LOG] SoundI::release                          :     6 (0000021DAEE60878)
+[LOG] SoundI::release                          :  (0000021ECA45AF88)
+[LOG] SoundI::release                          :     1 (0000021DAEE61578)
+[LOG] SoundI::release                          :  (0000021C617BFF28)
+[LOG] SoundI::release                          :     4 (0000021DFE8B7D88)
+[LOG] SoundI::release                          :  (0000021ECA45B548)
+[LOG] SoundI::release                          :     5 (0000021DAEE5BDB8)
+[LOG] SoundI::release                          :  (0000021ECA45B0F8)
+[LOG] SoundI::release                          :     5 (0000021DAEE60EF8)
+[LOG] SoundI::release                          :  (0000021C617BEF58)
+[LOG] SoundI::release                          :     8 (0000021E02BEC218)
+[LOG] SoundI::release                          :  (0000021ECA45A298)
+[LOG] SoundI::release                          :     9 (0000021DAEE613D8)
+[LOG] SoundI::release                          :  (0000021C617C04E8)
+[LOG] SoundI::release                          :     3 (0000021C8CAE61F8)
+[LOG] SoundI::release                          :  (0000021ECA45AE18)
+[LOG] SoundI::release                          :     1 (0000021DAEE60D58)
+[LOG] SoundI::release                          :  (0000021ECA45A128)
+[LOG] SoundI::release                          :     4 (0000021DAEE61718)
+[LOG] SoundI::release                          :  (0000021C617C0658)
+[LOG] SoundI::release                          :     2 (0000021C8CAE6058)
+[LOG] SoundI::release                          :  (0000021ECA459FB8)
+[LOG] SoundI::release                          :     10 (0000021DAEE5FB78)
+[LOG] SoundI::release                          :  (0000021ECA459888)
+[LOG] SoundI::release                          :     6 (0000021DAEE618B8)
+[LOG] SoundI::release                          :  (0000021ECA45B268)
+[LOG] SoundI::release                          :     7 (0000021DAEE61238)
+[LOG] SoundI::release                          :  (0000021C617BF518)
+[LOG] SoundI::release                          :     8 (0000021DF3D71A58)
+[LOG] SoundI::release                          :  (0000021C617BF238)
+[LOG] SoundI::release                          :     3 (0000021DF3D772D8)
+[LOG] SoundI::release                          :  (0000021ECA45AB38)
+[LOG] SoundI::release                          :     2 (0000021DAEE5DAF8)
+[LOG] SoundI::release                          :  (0000021C617BEC78)
+[LOG] SoundI::release                          :     1 (0000021DF3D77138)
+[LOG] SoundI::release                          :  (0000021EC9DD4458)
+[LOG] SoundI::release                          :     10 (0000021DAEE5B738)
+[LOG] SoundI::release                          :  (0000021ECA45A408)
+[LOG] SoundI::release                          :     5 (0000021DAEE61A58)
+[LOG] SoundI::release                          :  (0000021ECA4599F8)
+[LOG] SoundI::release                          :     7 (0000021DAEE5C5D8)
+[LOG] SoundI::release                          : Level1 - Trimmed (4) (0000021EC9D519C8)
+[LOG] SoundI::release                          :     Level1 - Trimmed (4) (0000021DAEE5EB38)
+[LOG] SoundI::release                          :     Level1 - Trimmed (4) (0000021EC9D4F2F8)
+[LOG] SoundI::release                          :  (0000021ECA459CD8)
+[LOG] SoundI::release                          :     6 (0000021DAEE5A3B8)
+[LOG] SoundI::release                          :  (0000021ECA45B3D8)
+[LOG] SoundI::release                          :     4 (0000021DAEE60A18)
+[LOG] SoundI::release                          :  (0000021C617C07C8)
+[LOG] SoundI::release                          :     9 (0000021DF3D77DC8)
+[LOG] SoundI::release                          :  (0000021ECA45A578)
+[LOG] SoundI::release                          :     test R (0000021DAEE5C438)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
