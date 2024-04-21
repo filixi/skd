@@ -1,7 +1,10 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public static class EnumerableExt
 {
@@ -36,6 +39,8 @@ public class MusicControl : MonoBehaviour
         return audio_source;
     }
 
+    private List<EventInstance> fxEventInstance = new List<EventInstance>();
+
     void Start()
     {
         for (int i = 0; i < 10; ++i)
@@ -44,6 +49,9 @@ public class MusicControl : MonoBehaviour
             long_click_musics.Add(AddAudioSource("LongClick" + i, "SoundEffect/SoundFX/Hold/" + (i + 1)));
             swip_musics.Add(AddAudioSource("Swip" + i, "SoundEffect/SoundFX/Flick/" + (i + 1)));
         }
+
+        for (int i = 0; i < 100; ++i)
+            fxEventInstance.Add(RuntimeManager.CreateInstance("event:/FX"));
 
         foreach (var x in long_click_musics)
             x.loop = true;
@@ -77,14 +85,26 @@ public class MusicControl : MonoBehaviour
         return index_shuffle[adj_index];
     }
 
-    public void SingleClickAt(Vector3 l)
+    int indexx = 0;
+    public void SingleClickAt(Vector3 l, float delay)
     {
-        single_click_musics[GetIndex(l)].Play();
+        
+        var local_index = indexx % fxEventInstance.Count();
+        var eve = fxEventInstance[local_index];
+
+        eve.setParameterByName("InputRegion", 6);
+        // eve.setProperty(FMOD.Studio.EVENT_PROPERTY.SCHEDULE_DELAY, delay);
+
+        eve.start();
+
+        ++indexx;
+        //single_click_musics[GetIndex(l)].Play();
     }
 
     public void SwipClickAt(Vector3 l)
     {
-        swip_musics[GetIndex(l)].Play();
+
+        // swip_musics[GetIndex(l)].Play();
     }
 
     public void HoldAt(Vector3 l)
@@ -103,6 +123,5 @@ public class MusicControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

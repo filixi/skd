@@ -138,6 +138,10 @@ public class WorldInterface : MonoBehaviour
         explosion.name = "Explosion";
     }
 
+    public float delay_dsp_clock = 0;
+    public int delay_tick = 12;
+    public bool stop = false;
+
     List<GameObject> blades = new List<GameObject>();
     public void BladeAt(Vector3 e1, Vector3 e2)
     {
