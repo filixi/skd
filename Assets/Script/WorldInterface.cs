@@ -67,7 +67,7 @@ public class WorldInterface : MonoBehaviour
     public GameObject music_control;
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
         sprite_manager.Initialize();
 
         var cc = GameObject.Find("MainCamera").GetComponent<CameraController>();

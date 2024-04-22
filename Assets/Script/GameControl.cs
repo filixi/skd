@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BeatControl
 {
@@ -130,7 +131,6 @@ public class GameControl : MonoBehaviour
     }
 
     FMOD.Studio.EVENT_CALLBACK _musicFmodCallback;
-    FMOD.Studio.EventInstance _musicEventInstance;
 
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
@@ -139,26 +139,30 @@ public class GameControl : MonoBehaviour
         if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER)
         {
             var parameter = (FMOD.Studio.TIMELINE_MARKER_PROPERTIES)System.Runtime.InteropServices.Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_MARKER_PROPERTIES));
-            Debug.LogFormat("Marker: {0}", (string)parameter.name);
+            // Debug.LogFormat("Marker: {0}", (string)parameter.name);
         }
 
         if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT)
         {
             var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
-            Debug.LogFormat("Marker: {0}", parameter.tempo.ToString());
+            self.eventInstance.getTimelinePosition(out var position);
+
+            // self.wi.ExplosionAt(new Vector3(0, 0, 0));
+            // self.wi.music_control.GetComponent<MusicControl>().SingleClickAt(new Vector3(0, 0, 0), 0);
+
+            // Debug.LogFormat("Tempo: {0}, {1}", parameter.tempo.ToString(), position);
         }
 
         return FMOD.RESULT.OK;
     }
 
     private EventInstance eventInstance;
+    private static GameControl self;
     void FMOD_PlayBGM()
     {
-        // FMOD.Studio.EventDescription desc = FMODUnity.RuntimeManager.GetEventDescription("event:/Parent");
-        // desc.createInstance(out _musicEventInstance);
-
         _musicFmodCallback = new FMOD.Studio.EVENT_CALLBACK(FMODEventCallback);
 
+        self = this;
         eventInstance = RuntimeManager.CreateInstance("event:/BGM");
 
         eventInstance.setCallback(_musicFmodCallback,
@@ -167,14 +171,28 @@ public class GameControl : MonoBehaviour
         eventInstance.start();
     }
 
+    int adjustment_tick = 0;
+    void FMOD_BeatTracker()
+    {
+        var beat_tracker = gameObject.AddComponent<BeatTracker>();
+        beat_tracker.musicPlayEvent = RuntimeManager.CreateInstance("event:/BGM");
+        BeatTracker.upBeatUpdate += () =>
+        {
+            adjustment_tick = ttick;
+            //foreach (var e in pending_user_input)
+            //    e.Invoke(0.0f);
+            //pending_user_input.Clear();
+        };
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         FMOD_PlayBGM();
+        // FMOD_BeatTracker();
     }
 
-CameraController cc;
+    CameraController cc;
     WorldInterface wi;
     public void Initialize(CameraController cc, WorldInterface wi)
     {
@@ -199,7 +217,6 @@ CameraController cc;
     {
         pending_user_input.Enqueue((float now) =>
         {
-
             wi.BladeAt(l1, l2);
             wi.music_control.GetComponent<MusicControl>().SwipClickAt(l1);
         });
@@ -222,11 +239,32 @@ CameraController cc;
 
     Vector3? laser;
     int ttick = 0;
+    float last_time = 0;
+    int last_position = 0;
+    int expecting_tick = 0;
+    int last_enter_tick = 0;
     void Update()
     {
+        // gameObject.GetComponent<BeatTracker>().UpdateImpl();
+
         control_state.UpdateState(cc, wi, this);
 
         ++ttick;
+        var interval = 30;
+        if (ttick % interval == 0)
+        {
+            var now = Time.time * 1000;
+            var delta = now - last_time;
+            last_time = now;
+
+            //var delta_p = position - last_position;
+            //last_position = position;
+
+            //Debug.LogFormat("T {0} -- {1}", now.ToString(), delta.ToString());
+            //Debug.LogFormat("M {0} -- {1}", position.ToString(), delta_p.ToString());
+
+        }
+
         if (!wi.stop && UnityEngine.Random.Range(0, 1) < 0.05)
         {
             // if (ttick % 250 < 125)
@@ -248,12 +286,24 @@ CameraController cc;
         // 4 1/8 per second
         // 8 1/16 per second
 
-        if (tick % 15 == wi.delay_tick)
+
+        var delta_tick = ttick - adjustment_tick;
+        delta_tick = tick;
+        if ((delta_tick % interval == wi.delay_tick && ttick - last_enter_tick > 10) || (expecting_tick - ttick) % interval == 0)
         {
+            last_enter_tick = ttick;
             foreach (var e in pending_user_input)
                 e.Invoke(position * 1.0f);
             pending_user_input.Clear();
+            
+            Debug.LogFormat("DT {0} {1}", position, Time.time * 1000);
         }
+
+        if (delta_tick % interval == wi.delay_tick)
+            expecting_tick = ttick + interval;
+
+
+        
 
         //var next_play = wi.delay_tick - tick % 15 + ttick;
         //var adj_next_play = next_play > ttick ? next_play  : next_play;

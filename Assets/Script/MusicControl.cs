@@ -88,7 +88,6 @@ public class MusicControl : MonoBehaviour
     int indexx = 0;
     public void SingleClickAt(Vector3 l, float delay)
     {
-        
         var local_index = indexx % fxEventInstance.Count();
         var eve = fxEventInstance[local_index];
 
