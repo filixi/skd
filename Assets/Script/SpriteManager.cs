@@ -83,11 +83,15 @@ public class SpriteManager
                 {
                     new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 1, entity_name = "Dog", render_data = new Vector4(4, 3, 0, 8) },
                     new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 2, entity_name = "CloseCombat", render_data = new Vector4(4, 5, 0, 16) },
-                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 3, entity_name = "Range", render_data = new Vector4(4, 5, 0, 0) },
-                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 4, entity_name = "Safe", render_data = new Vector4(4, 4, 0, 9) },
-                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 5, entity_name = "Explosion", render_data = new Vector4(3, 3, 0, 20) },
-                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 6, entity_name = "Blade", render_data = new Vector4(3, 3, 0, 23) },
-                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 7, entity_name = "Laser", render_data = new Vector4(4, 3, 0, 26) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 3, entity_name = "Ranged", render_data = new Vector4(4, 5, 0, 0) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 4, entity_name = "Shield", render_data = new Vector4(4, 5, 0, 4) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 5, entity_name = "Special", render_data = new Vector4(4, 5, 0, 12) },
+
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 6, entity_name = "Safe", render_data = new Vector4(4, 4, 0, 9) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 7, entity_name = "Explosion", render_data = new Vector4(3, 3, 0, 20) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 8, entity_name = "Blade", render_data = new Vector4(3, 3, 0, 23) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 9, entity_name = "Laser", render_data = new Vector4(4, 3, 0, 26) },
+                    new AtlasMapping { atlas_id = ma.atlas_id, entity_id = 10, entity_name = "Secret", render_data = new Vector4(3, 4, 0, 80) },
                 };
             entity_material_entry.atlas.Add(ma.atlas_id, ma);
         }

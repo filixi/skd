@@ -20,6 +20,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-8891713170039831022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 2
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-8400571075256394635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +123,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-6579168257028633579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/InputRegion
+  m_EditorClassIdentifier: 
+  Name: InputRegion
+  Min: 1
+  Max: 10
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-3764155978024790968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +158,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638493356560000000
+  lastModified: 638494085480000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -137,7 +177,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/FX.bank
   Name: FX
   StudioPath: bank:/FX
-  lastModified: 638493356560000000
+  lastModified: 638494085480000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -181,8 +221,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1646613366702040061}
-  - {fileID: 6162452889868850459}
+  - {fileID: -6579168257028633579}
+  - {fileID: -8891713170039831022}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -211,7 +251,7 @@ MonoBehaviour:
   - {fileID: -3764155978024790968}
   StringsBanks:
   - {fileID: 323364683261137055}
-  stringsBankWriteTime: 638493356560000000
+  stringsBankWriteTime: 638494085480000000
   cacheVersion: 6
 --- !u!114 &323364683261137055
 MonoBehaviour:
@@ -228,7 +268,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638493356560000000
+  lastModified: 638494085480000000
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -249,7 +289,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638493356560000000
+  lastModified: 638494085480000000
   LoadResult: 0
   FileSizes: []
   Exists: 1

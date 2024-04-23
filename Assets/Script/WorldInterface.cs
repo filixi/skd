@@ -23,24 +23,15 @@ public static class Tick
 
 public class WorldInterface : MonoBehaviour
 {
-    SpriteManager sprite_manager = new SpriteManager();
+    public SpriteManager sprite_manager = new SpriteManager();
 
     // Start is called before the first frame update
-    List<GameObject> test_enemies;
-    GameObject prefab_basic_enemy;
     GameObject prefab_basic_explosion;
     GameObject prefab_basic_blade;
     GameObject prefab_basic_laser;
 
     void InitializePrefabs()
     {
-        prefab_basic_enemy = Instantiate(Resources.Load<GameObject>("Prefabs/BasicEntity"));
-        prefab_basic_enemy.SetActive(false);
-        prefab_basic_enemy.AddComponent<RegularEnemy>();
-        prefab_basic_enemy.AddComponent<FlipbookRender>();
-        prefab_basic_enemy.GetComponent<Renderer>().material =
-            Instantiate(sprite_manager.entity_material_entry.array_material);
-
         prefab_basic_explosion = Instantiate(Resources.Load<GameObject>("Prefabs/BasicEntity"));
         prefab_basic_explosion.SetActive(false);
         prefab_basic_explosion.AddComponent<ExplosionControl>();
@@ -63,12 +54,17 @@ public class WorldInterface : MonoBehaviour
             Instantiate(sprite_manager.entity_material_entry.array_material);
     }
 
+    GameObject game_data;
     GameObject game_control;
     public GameObject music_control;
     void Start()
     {
         Application.targetFrameRate = 120;
         sprite_manager.Initialize();
+
+        game_data = new GameObject();
+        game_data.name = "GameData";
+        game_data.AddComponent<GameData>();
 
         var cc = GameObject.Find("MainCamera").GetComponent<CameraController>();
 
@@ -81,31 +77,6 @@ public class WorldInterface : MonoBehaviour
         music_control.name = "MusicControl";
 
         InitializePrefabs();
-
-        test_enemies = new List<GameObject>();
-        int enemy_count = 10;
-        for (int i = 0; i < enemy_count; ++i)
-        {
-            var l = new Vector3(UnityEngine.Random.Range(-10.0f, 10.0f), 0, UnityEngine.Random.Range(-10.0f, 10.0f));
-            
-            var enemy = Instantiate(prefab_basic_enemy);
-            enemy.SetActive(true);
-
-            var enemy_package = new EnemyPackage();
-            enemy_package.hp_cap = 500;
-            enemy_package.start = l;
-            enemy_package.end = new Vector3(0, 0, 0);
-            enemy_package.speed = 0.005f;
-            enemy.GetComponent<RegularEnemy>().Initialize(enemy_package);
-
-            enemy.GetComponent<FlipbookRender>().Initialize(
-                    sprite_manager.entity_material_entry.id_mapping["Dog"].render_data,
-                    l
-                );
-            enemy.name = "Dog";
-
-            test_enemies.Add(enemy);
-        }
     }
 
     List<GameObject> explosions = new List<GameObject>();
@@ -138,9 +109,8 @@ public class WorldInterface : MonoBehaviour
         explosion.name = "Explosion";
     }
 
-    public float delay_dsp_clock = 0;
     public int delay_tick = 12;
-    public bool stop = false;
+    public bool stop = true;
 
     List<GameObject> blades = new List<GameObject>();
     public void BladeAt(Vector3 e1, Vector3 e2)
@@ -171,29 +141,7 @@ public class WorldInterface : MonoBehaviour
         blade.name = "Blade";
     }
 
-    private Vector3? FindClosestMonster(Vector3 e)
-    {
-        if (test_enemies.Count <= 0)
-            return null;
-
-        GameObject min = null;
-        float distance = 0;
-        foreach (var v in test_enemies)
-        {
-            if (!v.GetComponent<RegularEnemy>().IsAlive())
-                continue;
-
-            var d = (v.transform.position - e).magnitude;
-            if (min == null || distance > d)
-            {
-                distance = d;
-                min = v;
-            }
-        }
-        if (min == null)
-            return null;
-        return min.transform.position;
-    }
+    
 
     GameObject laser = null;
     public void LaserStop()
@@ -203,7 +151,7 @@ public class WorldInterface : MonoBehaviour
     }
     public void LaserAt(Vector3 e1)
     {
-        var ne2 = FindClosestMonster(e1);
+        var ne2 = game_data.GetComponent<GameData>().FindClosestMonster(e1);
         if (ne2 == null)
             return;
         var e2 = ne2.Value;
@@ -228,11 +176,9 @@ public class WorldInterface : MonoBehaviour
     {
         Tick.TickUpdate();
 
-        foreach (var e in test_enemies)
-            e.GetComponent<RegularEnemy>().Refresh(Tick.tick);
+        var cc = GameObject.Find("MainCamera").GetComponent<CameraController>();
+        game_data.GetComponent<GameData>().GenerateEnemies(cc.GetCameraBounds(), 20, 2 / 60.0f, this);
 
-        foreach (var e in test_enemies)
-            e.GetComponent<FlipbookRender>().Refresh(Tick.tick);
         foreach (var e in explosions)
             e.GetComponent<FlipbookRender>().Refresh(Tick.tick);
         foreach (var e in blades)

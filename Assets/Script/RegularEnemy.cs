@@ -7,7 +7,8 @@ public enum DamageType
 {
     Explosive,
     Laser,
-    Blade
+    Blade,
+    Standard,
 }
 
 public enum EnemyType
@@ -24,12 +25,25 @@ public class EnemyPackage
     public Vector3 start;
     public Vector3 end;
     public long spawn_tick;
+
+    public long last_attack_tick = 0;
+    public int attack_interval = 0;
+    public int dph = 0;
+
+    public float attack_range;
+
+    public string name;
 }
 
 public class RegularEnemy : MonoBehaviour, FlipbookRenderData
 {
     EnemyPackage package;
-    int hp = 0;
+    public int hp = 0;
+
+    public EnemyPackage GetEnemyPackage()
+    {
+        return package;
+    }
 
     public void Initialize(EnemyPackage package)
     {
@@ -41,6 +55,9 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
     public void TakeDamage(DamageType damage_type, int damage, long tick)
     {
         if (!IsAlive())
+            return;
+
+        if (name == "Secret" && damage_type != DamageType.Standard)
             return;
 
         hp -= damage;
@@ -82,4 +99,5 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
             m[1, 0] = slice_progress;
         }
     }
+
 }

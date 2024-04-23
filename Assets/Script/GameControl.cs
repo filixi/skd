@@ -171,25 +171,10 @@ public class GameControl : MonoBehaviour
         eventInstance.start();
     }
 
-    int adjustment_tick = 0;
-    void FMOD_BeatTracker()
-    {
-        var beat_tracker = gameObject.AddComponent<BeatTracker>();
-        beat_tracker.musicPlayEvent = RuntimeManager.CreateInstance("event:/BGM");
-        BeatTracker.upBeatUpdate += () =>
-        {
-            adjustment_tick = ttick;
-            //foreach (var e in pending_user_input)
-            //    e.Invoke(0.0f);
-            //pending_user_input.Clear();
-        };
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         FMOD_PlayBGM();
-        // FMOD_BeatTracker();
     }
 
     CameraController cc;
@@ -201,8 +186,6 @@ public class GameControl : MonoBehaviour
     }
 
     Queue<Action<float>> pending_user_input = new Queue<Action<float>>();
-    Dictionary<int, Queue<Action<float>>> scheduled_user_input = new Dictionary<int, Queue<Action<float>>>();
-
     public void SingleClickAt(Vector3 l)
     {
         pending_user_input.Enqueue((float now) =>
@@ -210,7 +193,7 @@ public class GameControl : MonoBehaviour
             var next = (int)(now + 125) / 125 * 125;
 
             wi.ExplosionAt(l);
-            wi.music_control.GetComponent<MusicControl>().SingleClickAt(l, -1 /*wi.delay_dsp_clock * 46.3f*/);
+            wi.music_control.GetComponent<MusicControl>().SingleClickAt(l);
         });
     }
     public void SwipAt(Vector3 l1, Vector3 l2)
@@ -239,38 +222,17 @@ public class GameControl : MonoBehaviour
 
     Vector3? laser;
     int ttick = 0;
-    float last_time = 0;
-    int last_position = 0;
     int expecting_tick = 0;
     int last_enter_tick = 0;
     void Update()
     {
-        // gameObject.GetComponent<BeatTracker>().UpdateImpl();
-
         control_state.UpdateState(cc, wi, this);
 
         ++ttick;
-        var interval = 30;
-        if (ttick % interval == 0)
-        {
-            var now = Time.time * 1000;
-            var delta = now - last_time;
-            last_time = now;
-
-            //var delta_p = position - last_position;
-            //last_position = position;
-
-            //Debug.LogFormat("T {0} -- {1}", now.ToString(), delta.ToString());
-            //Debug.LogFormat("M {0} -- {1}", position.ToString(), delta_p.ToString());
-
-        }
+        var interval = 15;
 
         if (!wi.stop && UnityEngine.Random.Range(0, 1) < 0.05)
         {
-            // if (ttick % 250 < 125)
-            //if (scheduled_user_input.Count <= 0)
-            //    SingleClickAt(new Vector3(0, 0, 0));
-
             if (pending_user_input.Count <= 0)
                 SingleClickAt(new Vector3(0, 0, 0));
         }
@@ -286,61 +248,48 @@ public class GameControl : MonoBehaviour
         // 4 1/8 per second
         // 8 1/16 per second
 
-
-        var delta_tick = ttick - adjustment_tick;
-        delta_tick = tick;
-        if ((delta_tick % interval == wi.delay_tick && ttick - last_enter_tick > 10) || (expecting_tick - ttick) % interval == 0)
-        {
-            last_enter_tick = ttick;
-            foreach (var e in pending_user_input)
-                e.Invoke(position * 1.0f);
-            pending_user_input.Clear();
-            
-            Debug.LogFormat("DT {0} {1}", position, Time.time * 1000);
-        }
+        var delta_tick = tick;
 
         if (delta_tick % interval == wi.delay_tick)
             expecting_tick = ttick + interval;
-
-
         
+        bool synchronized = false;
+        if ((delta_tick % interval == wi.delay_tick && ttick - last_enter_tick > 10) || (expecting_tick - ttick) % interval == 0)
+            synchronized = true;
+        if (!synchronized)
+            return;
 
-        //var next_play = wi.delay_tick - tick % 15 + ttick;
-        //var adj_next_play = next_play > ttick ? next_play  : next_play;
-        //while (pending_user_input.Count > 0)
-        //{
-        //    if (!scheduled_user_input.ContainsKey(adj_next_play))
-        //        scheduled_user_input.Add(adj_next_play, new Queue<Action<float>>());
-        //    scheduled_user_input[adj_next_play].Enqueue(pending_user_input.Dequeue());
-        //}
+        last_enter_tick = ttick;
 
-        //scheduled_user_input.TryGetValue(ttick, out var scheduled);
-        //if (scheduled != null)
-        //{
-        //    foreach (var a in scheduled)
-        //        a.Invoke(position / 1.0f);
-        //}
-        //var out_dated = scheduled_user_input.Keys.Where(v => v <= ttick).ToList();
-        //foreach (var v in out_dated)
-        //    scheduled_user_input.Remove(v);
+        foreach (var e in pending_user_input)
+            e.Invoke(position * 1.0f);
+        pending_user_input.Clear();
 
-        if (pending_long_click.Count <= 0 && tick % 15 == wi.delay_tick)
+        // Debug.LogFormat("DT {0} {1}", position, Time.time * 1000);
+
+        var music_control = wi.music_control.GetComponent<MusicControl>();
+        
+        if (pending_long_click.Count <= 0 && laser != null)
         {
-            if (laser != null)
-                wi.music_control.GetComponent<MusicControl>().HoldStopAt(laser.Value);
+            music_control.HoldStopAt(laser.Value);
             wi.LaserStop();
+            laser = null;
         }
+
         while (pending_long_click.Count > 0)
         {
             var l1 = pending_long_click.Dequeue();
 
             if (pending_long_click.Count == 0)
             {
-                if (laser != null && laser.Value != l1)
-                    wi.music_control.GetComponent<MusicControl>().HoldStopAt(laser.Value);
+                if (laser != null && !music_control.IsSameRegion(laser.Value, l1))
+                {
+                    music_control.HoldStopAt(laser.Value);
+                    wi.LaserStop();
+                }
 
                 wi.LaserAt(l1);
-                wi.music_control.GetComponent<MusicControl>().HoldAt(l1);
+                music_control.HoldAt(l1);
                 laser = l1;
             }
         }

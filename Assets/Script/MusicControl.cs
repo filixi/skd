@@ -39,7 +39,9 @@ public class MusicControl : MonoBehaviour
         return audio_source;
     }
 
-    private List<EventInstance> fxEventInstance = new List<EventInstance>();
+    List<EventInstance> fx_single_click_musics = new List<EventInstance>();
+    List<EventInstance> fx_long_click_musics = new List<EventInstance>();
+    List<EventInstance> fx_swip_musics = new List<EventInstance>();
 
     void Start()
     {
@@ -50,8 +52,12 @@ public class MusicControl : MonoBehaviour
             swip_musics.Add(AddAudioSource("Swip" + i, "SoundEffect/SoundFX/Flick/" + (i + 1)));
         }
 
-        for (int i = 0; i < 100; ++i)
-            fxEventInstance.Add(RuntimeManager.CreateInstance("event:/FX"));
+        for (int i = 0; i < 40; ++i)
+        {
+            fx_single_click_musics.Add(RuntimeManager.CreateInstance("event:/FX"));
+            fx_long_click_musics.Add(RuntimeManager.CreateInstance("event:/FX"));
+            fx_swip_musics.Add(RuntimeManager.CreateInstance("event:/FX"));
+        }
 
         foreach (var x in long_click_musics)
             x.loop = true;
@@ -77,46 +83,54 @@ public class MusicControl : MonoBehaviour
 
         var adj_l = l - bound.Value.min;
 
-        var index = (adj_l.x / x_length) * 5 + (adj_l.z / z_length);
+        var index = (int)(adj_l.x / x_length) * 5 + (int)(adj_l.z / z_length);
 
-        var adj_index = Mathf.Clamp((int)index, 0, index_shuffle.Count - 1);
+        var adj_index = Mathf.Clamp(index, 0, index_shuffle.Count - 1);
 
-        Debug.Log("MusicIndex: " + adj_index);
+        Debug.LogFormat("MusicIndex: {0}, {1}", l, index_shuffle[adj_index]);
         return index_shuffle[adj_index];
     }
 
-    int indexx = 0;
-    public void SingleClickAt(Vector3 l, float delay)
+    public bool IsSameRegion(Vector3 l, Vector3 r)
     {
-        var local_index = indexx % fxEventInstance.Count();
-        var eve = fxEventInstance[local_index];
+        return GetIndex(l) == GetIndex(r);
+    }
 
-        eve.setParameterByName("InputRegion", 6);
-        // eve.setProperty(FMOD.Studio.EVENT_PROPERTY.SCHEDULE_DELAY, delay);
+    public void SingleClickAt(Vector3 l)
+    {
+        var eve = fx_single_click_musics[GetIndex(l)];
 
+        eve.setParameterByName("InputType", 1);
+        eve.setParameterByName("InputRegion", GetIndex(l) + 1);
         eve.start();
-
-        ++indexx;
-        //single_click_musics[GetIndex(l)].Play();
     }
 
     public void SwipClickAt(Vector3 l)
     {
+        var eve = fx_swip_musics[GetIndex(l)];
 
-        // swip_musics[GetIndex(l)].Play();
+        eve.setParameterByName("InputType", 2);
+        eve.setParameterByName("InputRegion", GetIndex(l) + 1);
+        eve.start();
     }
 
     public void HoldAt(Vector3 l)
     {
-        var audio_source = long_click_musics[GetIndex(l)];
-        if (!audio_source.isPlaying)
-            audio_source.Play();
+        var eve = fx_long_click_musics[GetIndex(l)];
+
+        eve.getPlaybackState(out var state);
+        if (state != PLAYBACK_STATE.PLAYING)
+        {
+            eve.setParameterByName("InputType", 2);
+            eve.setParameterByName("InputRegion", GetIndex(l) + 1);
+            eve.start();
+        }
     }
 
     public void HoldStopAt(Vector3 l)
     {
-        var audio_source = long_click_musics[GetIndex(l)];
-        audio_source.Stop();
+        var eve = fx_long_click_musics[GetIndex(l)];
+        eve.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
     // Update is called once per frame

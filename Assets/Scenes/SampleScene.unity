@@ -473,9 +473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music_control: {fileID: 0}
-  delay_dsp_clock: 0
   delay_tick: 12
-  stop: 0
+  stop: 1
 --- !u!4 &1120554349
 Transform:
   m_ObjectHideFlags: 0
