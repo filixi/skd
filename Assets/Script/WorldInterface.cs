@@ -54,7 +54,7 @@ public class WorldInterface : MonoBehaviour
             Instantiate(sprite_manager.entity_material_entry.array_material);
     }
 
-    GameObject game_data;
+    public GameObject game_data;
     GameObject game_control;
     public GameObject music_control;
     void Start()

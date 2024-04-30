@@ -36,7 +36,7 @@ public class Secret : MonoBehaviour
             }
         }
 
-        if (!gd.secret.GetComponent<RegularEnemy>().IsAlive())
-            Debug.Log("Game over");
+        //if (!gd.secret.GetComponent<RegularEnemy>().IsAlive())
+        //    Debug.Log("Game over");
     }
 }

@@ -1,3 +1,4 @@
+using FMOD;
 using FMOD.Studio;
 using FMODUnity;
 using System;
@@ -56,7 +57,8 @@ public class BeatControl
 
 public enum ControlState
 {
-    RegularState,
+    TouchRegularControlState,
+    KeyboardRegularControlState,
     BossFightState
 }
 
@@ -66,11 +68,11 @@ interface IControlState
     void UpdateState(CameraController cc, WorldInterface wi, GameControl gc);
 }
 
-class RegularControlState : IControlState
+class TouchRegularControlState : IControlState
 {
     public ControlState GetControlState()
     {
-        return ControlState.RegularState;
+        return ControlState.TouchRegularControlState;
     }
 
     List<Vector3> sample = new List<Vector3>();
@@ -116,9 +118,77 @@ class RegularControlState : IControlState
     }
 }
 
+class KeyboardRegularControlState : IControlState
+{
+    public ControlState GetControlState()
+    {
+        return ControlState.KeyboardRegularControlState;
+    }
+
+    public void UpdateState(CameraController cc, WorldInterface wi, GameControl gc)
+    {
+        List<List<KeyCode>> attack_key = new List<List<KeyCode>> {
+                new List<KeyCode>{ KeyCode.Alpha1, KeyCode.Alpha2,KeyCode.Alpha3,KeyCode.Alpha4,KeyCode.Alpha5,KeyCode.Alpha6,KeyCode.Alpha7,KeyCode.Alpha8,KeyCode.Alpha9,KeyCode.Alpha0 },
+                new List<KeyCode>{ KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P, },
+                new List<KeyCode>{ KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.J, KeyCode.K, KeyCode.L, },
+                new List<KeyCode>{ KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.M, },
+            };
+
+        List<Tuple<KeyCode, Vector3Int>> keys = new List<Tuple<KeyCode, Vector3Int>>();
+        for (int i = 0; i < attack_key.Count; ++i)
+        {
+            for (int j = 0; j < attack_key[i].Count; ++j)
+                keys.Add(Tuple.Create(attack_key[i][j], new Vector3Int(j, 0, i)));
+        }
+
+        var key_down = keys.Select((key => Tuple.Create(Input.GetKeyDown(key.Item1), key.Item2))).Where(key => key.Item1);
+        var key_up = keys.Select((key => Tuple.Create(Input.GetKeyUp(key.Item1), key.Item2))).Where(key => key.Item1);
+
+        var bound = cc.GetCameraBounds();
+        var x_span = bound.max.x - bound.min.x;
+        var z_span = bound.max.z - bound.min.z;
+
+        var location_down = key_down.Select(key =>
+            {
+                var x_rate = 1.0f / attack_key[key.Item2.z].Count;
+                var z_rate = 1.0f / attack_key.Count;
+
+                return new Vector3(
+                    Mathf.Lerp(bound.min.x, bound.max.x, x_rate * key.Item2.x + x_rate / 2),
+                    0,
+                    Mathf.Lerp(bound.max.z, bound.min.z, z_rate * key.Item2.z + z_rate / 2));
+            });
+        var location_up = key_up.Select(key =>
+            {
+                var x_rate = 1.0f / attack_key[key.Item2.z].Count;
+                var z_rate = 1.0f / attack_key.Count;
+
+                return new Vector3(
+                    Mathf.Lerp(bound.min.x, bound.max.x, x_rate * key.Item2.x + x_rate / 2),
+                    0,
+                    Mathf.Lerp(bound.max.z, bound.min.z, z_rate * key.Item2.z + z_rate / 2));
+            });
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            foreach (var u in location_up)
+            {
+                var x = wi.game_data.GetComponent<GameData>().FindClosestMonster(u);
+                if (x.HasValue)
+                    gc.SwipAt(u, x.Value);
+            }
+        } else {
+            foreach (var u in location_up)
+            {
+                gc.SingleClickAt(u);
+            }
+        }
+    }
+}
+
 public class GameControl : MonoBehaviour
 {
-    IControlState control_state = new RegularControlState();
+    IControlState control_state = new KeyboardRegularControlState();
 
     AudioSource audio_source;
     void AudioSource_PlayBGM()

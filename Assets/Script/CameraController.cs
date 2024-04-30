@@ -49,21 +49,22 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 delta = new Vector3(0, 0, 0);
-        if (Input.GetKey("w"))
-            delta += new Vector3(0, 0, 1);
-        if (Input.GetKey("s"))
-            delta += new Vector3(0, 0, -1);
-        if (Input.GetKey("a"))
-            delta += new Vector3(-1, 0, 0);
-        if (Input.GetKey("d"))
-            delta += new Vector3(1, 0, 0);
+        return;
+        //Vector3 delta = new Vector3(0, 0, 0);
+        //if (Input.GetKey("w"))
+        //    delta += new Vector3(0, 0, 1);
+        //if (Input.GetKey("s"))
+        //    delta += new Vector3(0, 0, -1);
+        //if (Input.GetKey("a"))
+        //    delta += new Vector3(-1, 0, 0);
+        //if (Input.GetKey("d"))
+        //    delta += new Vector3(1, 0, 0);
 
-        camera_c.orthographicSize -= Input.mouseScrollDelta.y;
-        camera_c.orthographicSize = UnityEngine.Mathf.Clamp(camera_c.orthographicSize, 3, 20);
+        //camera_c.orthographicSize -= Input.mouseScrollDelta.y;
+        //camera_c.orthographicSize = UnityEngine.Mathf.Clamp(camera_c.orthographicSize, 3, 20);
 
-        delta.Normalize();
-        transform.position += delta * 3 * camera_c.orthographicSize * Time.deltaTime;
+        //delta.Normalize();
+        //transform.position += delta * 3 * camera_c.orthographicSize * Time.deltaTime;
     }
 
     Vector2? CalculateIntersection(Vector3 p31, Vector3 p32, Vector3 p33, Vector3 p34)

@@ -472,6 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe71609fe94d0d4b930603c513e3e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game_data: {fileID: 0}
   music_control: {fileID: 0}
   delay_tick: 12
   stop: 1
