@@ -33,7 +33,7 @@ public class BladeControl : MonoBehaviour, FlipbookRenderData
         return Vector3.Distance(end, gameObject.transform.position) < 0.05;
     }
 
-    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick)
+    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale)
     {
         gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.right, end - start);
 

@@ -47,11 +47,11 @@ public class ExplosionControl : MonoBehaviour, FlipbookRenderData
         return ComputeExpansionProgress(tick) >= 1;
     }
 
-    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick)
+    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale)
     {
         var expand_progress = ComputeExpansionProgress(tick);
         if (expand_progress < 1)
-            gameObject.transform.localScale = Vector3.one * expand_progress * 0.8f;
+            gameObject.transform.localScale = Vector3.one * scale * expand_progress * 0.8f;
 
         var fade_progress = ComputeFadeOutProgress(tick);
         m[2, 0] = Mathf.Clamp((fade_progress - 0.5f) * 2, 0, 1);

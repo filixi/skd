@@ -101,7 +101,7 @@ public class MusicControl : MonoBehaviour
         var eve = fx_single_click_musics[GetIndex(l)];
 
         eve.setParameterByName("InputType", 1);
-        eve.setParameterByName("InputRegion", GetIndex(l) + 1);
+        eve.setParameterByName("Inst", (GetIndex(l) + 1) % 4);
         eve.start();
     }
 
@@ -110,7 +110,7 @@ public class MusicControl : MonoBehaviour
         var eve = fx_swip_musics[GetIndex(l)];
 
         eve.setParameterByName("InputType", 2);
-        eve.setParameterByName("InputRegion", GetIndex(l) + 1);
+        eve.setParameterByName("Inst", (GetIndex(l) + 1) % 4);
         eve.start();
     }
 
@@ -121,8 +121,8 @@ public class MusicControl : MonoBehaviour
         eve.getPlaybackState(out var state);
         if (state != PLAYBACK_STATE.PLAYING)
         {
-            eve.setParameterByName("InputType", 2);
-            eve.setParameterByName("InputRegion", GetIndex(l) + 1);
+            eve.setParameterByName("InputType", 3);
+            eve.setParameterByName("Inst", (GetIndex(l) + 1) % 4);
             eve.start();
         }
     }

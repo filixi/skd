@@ -5,7 +5,7 @@ using static UnityEditor.FilePathAttribute;
 
 public interface FlipbookRenderData
 {
-    void UpdateAnimationMatrix(ref Matrix4x4 m, long tick);
+    void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale);
 }
 
 public class FlipbookRender : MonoBehaviour
@@ -17,18 +17,20 @@ public class FlipbookRender : MonoBehaviour
     }
 
     Vector4 render_data;
-    public void Initialize(Vector4 render_data, Vector3 location)
+    float scale = 1;
+    public void Initialize(Vector4 render_data, Vector3 location, float scale = 1)
     {
         this.render_data = render_data;
         gameObject.GetComponent<Renderer>().material.SetVector("_Data", render_data);
 
-        gameObject.transform.localScale = new Vector3(render_data[0] / 10, 1, render_data[1] / 10);
+        gameObject.transform.localScale = new Vector3(render_data[0] / 10, 1, render_data[1] / 10) * scale;
         gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         gameObject.transform.position = location;
 
+        this.scale = scale;
         Matrix4x4 animation_data = new Matrix4x4();
         foreach (var c in GetComponents<FlipbookRenderData>())
-            c.UpdateAnimationMatrix(ref animation_data, 0);
+            c.UpdateAnimationMatrix(ref animation_data, 0, scale);
     }
 
     // Start is called before the first frame update
@@ -41,7 +43,7 @@ public class FlipbookRender : MonoBehaviour
     {
         Matrix4x4 animation_data = new Matrix4x4();
         foreach (var c in GetComponents<FlipbookRenderData>())
-            c.UpdateAnimationMatrix(ref animation_data, tick);
+            c.UpdateAnimationMatrix(ref animation_data, tick, scale);
 
         gameObject.GetComponent<Renderer>().material.SetMatrix("_AnimationData_0", animation_data);
     }

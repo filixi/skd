@@ -85,7 +85,7 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
         transform.position = Vector3.Lerp(start, end, total_progress);
     }
 
-    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick)
+    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale)
     {
         m[1, 3] = gameObject.transform.position.x > package.end.x ? 1.0f : 0.0f;
 

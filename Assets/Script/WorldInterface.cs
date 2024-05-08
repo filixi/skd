@@ -80,7 +80,7 @@ public class WorldInterface : MonoBehaviour
     }
 
     List<GameObject> explosions = new List<GameObject>();
-    public void ExplosionAt(Vector3 l)
+    public void ExplosionAt(Vector3 l, float scale = 1)
     {
         l.y = 0.1f;
 
@@ -102,7 +102,8 @@ public class WorldInterface : MonoBehaviour
         explosion.SetActive(true);
         explosion.GetComponent<FlipbookRender>().Initialize(
                         sprite_manager.entity_material_entry.id_mapping["Explosion"].render_data,
-                        l
+                        l,
+                        scale
                     );
         explosion.GetComponent<ExplosionControl>().Initialize(Tick.tick);
         explosion.transform.localScale = Vector3.zero;
@@ -177,7 +178,7 @@ public class WorldInterface : MonoBehaviour
         Tick.TickUpdate();
 
         var cc = GameObject.Find("MainCamera").GetComponent<CameraController>();
-        game_data.GetComponent<GameData>().GenerateEnemies(cc.GetCameraBounds(), 20, 2 / 60.0f, this);
+        game_data.GetComponent<GameData>().GenerateEnemies(cc.GetCameraBounds(), 80, 10 / 60.0f, this);
 
         foreach (var e in explosions)
             e.GetComponent<FlipbookRender>().Refresh(Tick.tick);

@@ -35,7 +35,7 @@ public class LaserControl : MonoBehaviour, FlipbookRenderData
     Vector3 end = Vector3.zero;
 
     Vector3? default_scale;
-    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick)
+    public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale)
     {
         if (default_scale == null)
             default_scale = gameObject.transform.localScale;

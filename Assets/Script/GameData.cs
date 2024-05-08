@@ -93,7 +93,7 @@ public class GameData : MonoBehaviour
 
         { // secret
             var secret = new EnemyPackage();
-            secret.hp_cap = 500;
+            secret.hp_cap = 2000;
             secret.end = new Vector3(0, 0, 0);
             secret.speed = 0.0f;
             secret.attack_interval = 0;
@@ -184,10 +184,18 @@ public class GameData : MonoBehaviour
         if (type_to_generate == null)
             return;
 
-        var l = new Vector3(
-            UnityEngine.Random.Range(bound.min.x, bound.max.x),
-            0,
-            UnityEngine.Random.Range(bound.min.z, bound.max.z));
+        var l = new Vector3(0, 0, 0);
+
+        int count_down = 50;
+        while (Vector3.Distance(l, Vector3.zero) < 10.0)
+        {
+            if (count_down-- <= 0)
+                return;
+            l = new Vector3(
+                UnityEngine.Random.Range(bound.min.x, bound.max.x),
+                0,
+                UnityEngine.Random.Range(bound.min.z, bound.max.z));
+        }
 
         foreach (var go in current_enemies)
         {
