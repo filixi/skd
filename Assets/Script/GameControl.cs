@@ -182,14 +182,14 @@ class KeyboardRegularControlState : IControlState
                 value.keys.Add(attack_key[i][j]);
                 
                 value.bound.min = new Vector3(
-                        x_span / attack_key[i].Count * j,
+                        x_span / attack_key[i].Count * j + bound.min.x,
                         0,
-                        z_span / attack_key.Count * i
+                        -z_span / attack_key.Count * i - bound.min.z
                     );
                 value.bound.max = new Vector3(
-                        x_span / attack_key[i].Count * (j+1),
+                        x_span / attack_key[i].Count * (j+1) + bound.min.x,
                         0,
-                        z_span / attack_key.Count * (i+1)
+                        -z_span / attack_key.Count * (i+1) - bound.min.z
                     );
                 value.center = (value.bound.min + value.bound.max) / 2.0f;
 
@@ -252,79 +252,55 @@ class KeyboardRegularControlState : IControlState
     Dictionary<KeyCode, long> down_count = new Dictionary<KeyCode, long>();
     public void UpdateState(CameraController cc, WorldInterface wi, GameControl gc)
     {
-        List<Tuple<Vector3Int, KeyCode>> keys = new List<Tuple<Vector3Int, KeyCode>>();
+        List<KeyCode> keys = new List<KeyCode>();
         for (int i = 0; i < attack_key.Count; ++i)
         {
             for (int j = 0; j < attack_key[i].Count; ++j)
-                keys.Add(Tuple.Create(new Vector3Int(j, 0, i), attack_key[i][j]));
+                keys.Add(attack_key[i][j]);
         }
 
-        foreach (var re in remap)
+        foreach (var re in remap.Keys)
         {
-            var result = keys.Find(t => t.Item2 == re.Value);
-            if (result != null)
-                keys.Add(Tuple.Create(result.Item1, re.Key));
+            keys.Add(re);
         }
 
-        var key_down = keys.Select((key => Tuple.Create(Input.GetKeyDown(key.Item2), key.Item1, key.Item2))).Where(key => key.Item1);
-        var key_up = keys.Select((key => Tuple.Create(Input.GetKeyUp(key.Item2), key.Item1, key.Item2))).Where(key => key.Item1);
-
-
-        var bound = cc.GetCameraBounds();
-        var x_span = bound.max.x - bound.min.x;
-        var z_span = bound.max.z - bound.min.z;
-
-        var location_down = key_down.Select(key =>
-            {
-                var x_rate = 1.0f / attack_key[key.Item2.z].Count;
-                var z_rate = 1.0f / attack_key.Count;
-
-                var l = new Vector3(
-                    Mathf.Lerp(bound.min.x, bound.max.x, x_rate * key.Item2.x + x_rate / 2),
-                    0,
-                    Mathf.Lerp(bound.max.z, bound.min.z, z_rate * key.Item2.z + z_rate / 2));
-                return new {location = l, key = key.Item3 };
-            });
-        var location_up = key_up.Select(key =>
-            {
-                var x_rate = 1.0f / attack_key[key.Item2.z].Count;
-                var z_rate = 1.0f / attack_key.Count;
-
-                var l = new Vector3(
-                    Mathf.Lerp(bound.min.x, bound.max.x, x_rate * key.Item2.x + x_rate / 2),
-                    0,
-                    Mathf.Lerp(bound.max.z, bound.min.z, z_rate * key.Item2.z + z_rate / 2));
-                return new {location = l, key = key.Item3 };
-            });
+        var key_down = keys.Where(key => Input.GetKey(key));
+        var key_up = keys.Where(key => Input.GetKeyUp(key));
 
         if (Input.GetKey(KeyCode.Space))
         {
-            foreach (var key in location_up)
+            foreach (var key in key_up)
             {
-                var x = wi.game_data.GetComponent<GameData>().FindClosestMonster(key.location);
+                var info = GetKeyBox(key, cc);
+                var x = wi.game_data.GetComponent<GameData>().FindClosestMonster(info.center);
                 if (x.HasValue)
-                    gc.SwipAt(key.location, x.Value);
+                    gc.SwipAt(info.center, x.Value);
             }
         } else {
-            foreach (var key in location_up)
+            foreach (var key in key_up)
             {
-                gc.SingleClickAt(key.location, key.key);
+                var info = GetKeyBox(key, cc);
+                gc.SingleClickAt(info.center, key);
             }
         }
 
-        return;
         HashSet<KeyCode> down_keys = new HashSet<KeyCode>();
-        foreach (var key in location_down)
+        foreach (var key in key_down)
         {
-            if (!down_keys.Contains(key.key))
-                down_keys.Add(key.key);
+            if (!down_keys.Contains(key))
+                down_keys.Add(key);
+        }
+        foreach (var key in key_down)
+        {
+            if (!down_count.ContainsKey(key))
+                down_count.Add(key, 1);
         }
         foreach (var key in down_count.Keys.ToList())
         {
-            bool has_value = down_count.TryGetValue(key, out var val);
+            down_count.TryGetValue(key, out var val);
             down_count.Remove(key);
             if (down_keys.Contains(key))
-                down_count.Add(key, has_value ? val + 1 : 1);
+                down_count.Add(key, val + 1);
         }
         foreach (var kv in down_count)
         {
