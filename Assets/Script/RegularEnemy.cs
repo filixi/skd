@@ -39,6 +39,8 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
 {
     EnemyPackage package;
     public int hp = 0;
+    public float current_speed = 1.0f;
+    public float accumulated_t = 0.0f;
 
     public EnemyPackage GetEnemyPackage()
     {
@@ -49,6 +51,8 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
     {
         this.package = package;
         hp = package.hp_cap;
+        current_speed = package.speed;
+        accumulated_t = 0;
     }
 
     long last_damage_taken = -10000;
@@ -59,6 +63,8 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
 
         if (name == "Secret" && damage_type != DamageType.Standard)
             return;
+        if (damage_type == DamageType.Laser)
+            current_speed = package.speed * 0.2f;
 
         hp -= damage;
         last_damage_taken = tick;
@@ -80,8 +86,14 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
         var start = package.start;
         var end = package.end;
 
+        current_speed += package.speed * 0.005f;
+        current_speed = Mathf.Clamp(current_speed, 0, package.speed);
+
         var total_t = Vector3.Distance(start, end) / package.speed;
-        var total_progress = (tick - package.spawn_tick) * 1.0f / total_t;
+
+        accumulated_t += current_speed / package.speed;
+
+        var total_progress = accumulated_t * 1.0f / total_t;
         transform.position = Vector3.Lerp(start, end, total_progress);
     }
 
@@ -99,5 +111,4 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
             m[1, 0] = slice_progress;
         }
     }
-
 }

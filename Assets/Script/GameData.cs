@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static GameData;
 
 public class GameData : MonoBehaviour
 {
@@ -9,6 +10,37 @@ public class GameData : MonoBehaviour
     void Start()
     {
     }
+
+    public class EnemyRefreshFrag
+    {
+        public int total_count = 60;
+
+        public float dog = 1;
+        public float standard = 1;
+        public float ranged = 1;
+        public float shield = 1;
+        public float special = 1;
+    }
+    List<EnemyRefreshFrag> enemy_refresh_sequence = new List<EnemyRefreshFrag>
+    {
+        new EnemyRefreshFrag{ total_count = 20, dog = 1, standard = 0, ranged = 0, shield = 0, special = 0 }, // 1
+        new EnemyRefreshFrag{ total_count = 30, dog = 2, standard = 1, ranged = 0, shield = 0, special = 0 }, // 2
+        new EnemyRefreshFrag{ total_count = 40, dog = 3, standard = 2, ranged = 1, shield = 0, special = 0 }, // 3
+        new EnemyRefreshFrag{ total_count = 50, dog = 4, standard = 3, ranged = 2, shield = 1, special = 1 },
+        new EnemyRefreshFrag{ total_count = 60, dog = 5, standard = 4, ranged = 3, shield = 2, special = 2 },
+        new EnemyRefreshFrag{ total_count = 70, dog = 0, standard = 5, ranged = 4, shield = 3, special = 3 },
+        new EnemyRefreshFrag{ total_count = 80, dog = 0, standard = 0, ranged = 5, shield = 4, special = 4 },
+        new EnemyRefreshFrag{ total_count = 90, dog = 0, standard = 0, ranged = 6, shield = 0, special = 5 },
+    };
+    public int current_frag_index = 0;
+    EnemyRefreshFrag GetCurrentRefreshFrag()
+    {
+        current_frag_index = Mathf.Clamp(current_frag_index, 0, enemy_refresh_sequence.Count);
+        if (current_frag_index >= enemy_refresh_sequence.Count)
+            return new EnemyRefreshFrag();
+        return enemy_refresh_sequence[current_frag_index];
+    }
+
 
     public enum EnemyType
     {
@@ -151,64 +183,61 @@ public class GameData : MonoBehaviour
     // enemy generator
     public GameObject secret = null;
     public List<GameObject> current_enemies = new List<GameObject>();
-    Dictionary<EnemyType, float> distribution = new Dictionary<EnemyType, float> {
-            {EnemyType.Dog, 1.0f },
-            {EnemyType.Special, 0.2f },
-            {EnemyType.Ranged, 0.8f },
-            {EnemyType.Shield, 0.5f },
-            {EnemyType.Standard, 1.5f }
-        };
-    public void GenerateEnemies(Bounds bound, int total, float rate_per_tick, WorldInterface wi)
+    void GenerateEnemyOfType(Bounds bound, int count, EnemyType enemy_type, WorldInterface wi)
+    {
+        if (enemy_type == EnemyType.Secret)
+            return;
+
+        for (int i = 0; i < count; ++i)
+        {
+            var l = new Vector3(0, 0, 0);
+
+            int count_down = 50;
+            while (Vector3.Distance(l, Vector3.zero) < 10.0)
+            {
+                if (count_down-- <= 0)
+                    return;
+                l = new Vector3(
+                    UnityEngine.Random.Range(bound.min.x, bound.max.x),
+                    0,
+                    UnityEngine.Random.Range(bound.min.z, bound.max.z));
+            }
+
+            foreach (var go in current_enemies)
+            {
+                if (!go.GetComponent<RegularEnemy>().IsAlive())
+                {
+                    ResetEnemy(go, enemy_type, l, wi);
+                    return;
+                }
+            }
+
+            current_enemies.Add(SpawnEnemy(enemy_type, l, wi));
+        }
+    }
+    public void GenerateEnemies(Bounds bound, WorldInterface wi)
     {
         if (secret == null)
         {
             secret = SpawnEnemy(EnemyType.Secret, new Vector3(0, 0, 0), wi);
             secret.AddComponent<Secret>();
         }
-
-        var to_generate = UnityEngine.Random.Range(0.0f, 1.0f);
-        if (to_generate > rate_per_tick)
-            return;
         
-        var sum = distribution.Values.Sum();
-        var random = UnityEngine.Random.Range(0, sum);
-        EnemyType? type_to_generate = null;
-        foreach (var kv in distribution)
-        {
-            type_to_generate = kv.Key;
-            random -= kv.Value;
-            if (random <= 0)
-                break;
-        }
-        
-        if (type_to_generate == null)
+        var setup = GetCurrentRefreshFrag();
+        int current_count = current_enemies.Count(v => v.GetComponent<RegularEnemy>().IsAlive());
+        if (current_count >= setup.total_count)
             return;
 
-        var l = new Vector3(0, 0, 0);
-
-        int count_down = 50;
-        while (Vector3.Distance(l, Vector3.zero) < 10.0)
-        {
-            if (count_down-- <= 0)
-                return;
-            l = new Vector3(
-                UnityEngine.Random.Range(bound.min.x, bound.max.x),
-                0,
-                UnityEngine.Random.Range(bound.min.z, bound.max.z));
-        }
-
-        foreach (var go in current_enemies)
-        {
-            if (!go.GetComponent<RegularEnemy>().IsAlive())
-            {
-                ResetEnemy(go, type_to_generate.Value, l, wi);
-                return;
-            }
-        }
-
-        if (current_enemies.Count > total)
-            return;
-        current_enemies.Add(SpawnEnemy(type_to_generate.Value, l, wi));
+        if (setup.dog > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.dog / 60)
+            GenerateEnemyOfType(bound, 1, EnemyType.Dog, wi);
+        if (setup.standard > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.standard / 60)
+            GenerateEnemyOfType(bound, 1, EnemyType.Standard, wi);
+        if (setup.ranged > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.ranged / 60)
+            GenerateEnemyOfType(bound, 1, EnemyType.Ranged, wi);
+        if (setup.shield > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.shield / 60)
+            GenerateEnemyOfType(bound, 1, EnemyType.Shield, wi);
+        if (setup.special > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.special / 60)
+            GenerateEnemyOfType(bound, 1, EnemyType.Special, wi);
     }
 
     public Vector3? FindClosestMonster(Vector3 e)

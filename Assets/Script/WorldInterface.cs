@@ -136,9 +136,10 @@ public class WorldInterface : MonoBehaviour
         blade.SetActive(true);
         blade.GetComponent<FlipbookRender>().Initialize(
                         sprite_manager.entity_material_entry.id_mapping["Blade"].render_data,
-                        e1
+                        e1,
+                        3
                     );
-        blade.GetComponent<BladeControl>().Initialize(Tick.tick, e1, e2, 2.0f);
+        blade.GetComponent<BladeControl>().Initialize(Tick.tick, e1, e2, 1.0f);
         blade.name = "Blade";
     }
 
@@ -178,7 +179,7 @@ public class WorldInterface : MonoBehaviour
         Tick.TickUpdate();
 
         var cc = GameObject.Find("MainCamera").GetComponent<CameraController>();
-        game_data.GetComponent<GameData>().GenerateEnemies(cc.GetCameraBounds(), 80, 10 / 60.0f, this);
+        game_data.GetComponent<GameData>().GenerateEnemies(cc.GetCameraBounds(), this);
 
         foreach (var e in explosions)
             e.GetComponent<FlipbookRender>().Refresh(Tick.tick);

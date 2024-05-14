@@ -27,7 +27,7 @@ public class LaserControl : MonoBehaviour, FlipbookRenderData
         {
             var receiver = collider.GetComponent<RegularEnemy>();
             if (receiver != null)
-                receiver.TakeDamage(DamageType.Explosive, 3, Tick.tick);
+                receiver.TakeDamage(DamageType.Laser, 3, Tick.tick);
         }
     }
 

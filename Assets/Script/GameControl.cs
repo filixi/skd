@@ -235,10 +235,15 @@ class KeyboardRegularControlState : IControlState
                 for (int j = 0; j < attack_key[i].Count; ++j)
                 {
                     neighbors.Add(attack_key[i][j], new HashSet<KeyCode>());
-                    add_neighbor(i, j, i-1, j);
-                    add_neighbor(i, j, i, j-1);
-                    add_neighbor(i, j, i+1, j);
-                    add_neighbor(i, j, i, j+1);
+                    add_neighbor(i, j, i - 1, j - 1);
+                    add_neighbor(i, j, i - 1, j);
+                    add_neighbor(i, j, i - 1, j + 1);
+                    add_neighbor(i, j, i, j - 1);
+                    add_neighbor(i, j, i, j);
+                    add_neighbor(i, j, i, j + 1);
+                    add_neighbor(i, j, i + 1, j - 1);
+                    add_neighbor(i, j, i + 1, j);
+                    add_neighbor(i, j, i + 1, j + 1);
                 }
             }
         }
@@ -249,7 +254,17 @@ class KeyboardRegularControlState : IControlState
         return value.Contains(b);
     }
 
+
+    // when to resolve key up
+    // after time pressed
+    // the same key clicked
+    // neighbor key pressed
+    //  check for the time passed
+    //    if short, resolve as super bomb
+    //    if long, resolve as swipe
+
     Dictionary<KeyCode, long> down_count = new Dictionary<KeyCode, long>();
+    Dictionary<KeyCode, long> up_tick = new Dictionary<KeyCode, long>();
     public void UpdateState(CameraController cc, WorldInterface wi, GameControl gc)
     {
         List<KeyCode> keys = new List<KeyCode>();
@@ -267,20 +282,49 @@ class KeyboardRegularControlState : IControlState
         var key_down = keys.Where(key => Input.GetKey(key));
         var key_up = keys.Where(key => Input.GetKeyUp(key));
 
-        if (Input.GetKey(KeyCode.Space))
+        foreach (var key in key_up)
         {
-            foreach (var key in key_up)
+            var clicked_before = up_tick.ContainsKey(key);
+            if (clicked_before)
             {
-                var info = GetKeyBox(key, cc);
-                var x = wi.game_data.GetComponent<GameData>().FindClosestMonster(info.center);
-                if (x.HasValue)
-                    gc.SwipAt(info.center, x.Value);
+                up_tick.Remove(key);
+                gc.SingleClickAt(GetKeyBox(key, cc).center, key);
             }
-        } else {
-            foreach (var key in key_up)
+
+            bool consumed = false;
+            foreach (var (kk, tick) in up_tick.ToList())
             {
-                var info = GetKeyBox(key, cc);
-                gc.SingleClickAt(info.center, key);
+                var is_neighbor = IsNeighbor(kk, key);
+                if (is_neighbor && Tick.tick - tick > 2)
+                {
+                    var from = GetKeyBox(key, cc).center;
+                    var to = GetKeyBox(kk, cc).center;
+                    var (afrom, ato) = cc.ComputeLineScreenIntersection(from, to);
+                    gc.SwipAt(ato, afrom);
+                    up_tick.Remove(kk);
+                    consumed = true;
+                    break;
+                }
+                else
+                {
+                    gc.SingleClickAt(GetKeyBox(key, cc).center, key);
+                    gc.SingleClickAt(GetKeyBox(kk, cc).center, kk);
+                    up_tick.Remove(kk);
+                    consumed = true;
+                    break;
+                }
+            }
+
+            if (!consumed)
+                up_tick.Add(key, Tick.tick);
+        }
+
+        foreach (var (kk, tick) in up_tick.ToList())
+        {
+            if (Tick.tick - tick > 7)
+            {
+                gc.SingleClickAt(GetKeyBox(kk, cc).center, kk);
+                up_tick.Remove(kk);
             }
         }
 
@@ -326,6 +370,7 @@ public class GameControl : MonoBehaviour
 
     FMOD.Studio.EVENT_CALLBACK _musicFmodCallback;
 
+    public static int index = 0;
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     static FMOD.RESULT FMODEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, System.IntPtr param, System.IntPtr parameterPtr)
@@ -333,7 +378,13 @@ public class GameControl : MonoBehaviour
         if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER)
         {
             var parameter = (FMOD.Studio.TIMELINE_MARKER_PROPERTIES)System.Runtime.InteropServices.Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_MARKER_PROPERTIES));
-            // Debug.LogFormat("Marker: {0}", (string)parameter.name);
+            var name = (string)parameter.name;
+            if (name.StartsWith("Stage"))
+            {
+                var number = name.Replace("Stage", "");
+                GameControl.index = Int32.Parse(number) - 1;
+            }
+            UnityEngine.Debug.LogFormat("Marker: {0}", (string)parameter.name);
         }
 
         if (type == FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT)
@@ -420,6 +471,8 @@ public class GameControl : MonoBehaviour
     int last_enter_tick = 0;
     void Update()
     {
+        wi.game_data.GetComponent<GameData>().current_frag_index = index;
+
         control_state.UpdateState(cc, wi, this);
 
         ++ttick;
