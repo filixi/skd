@@ -1,9 +1,10 @@
-Shader "Unlit/BackgroundTiling"
+Shader "Unlit/LaserFlipBook"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "red" {}
         _Tint ("Tint", Vector) = (1, 1, 1, 1)
+        _FrameCount ("FrameCount", float) = 3
     }
     SubShader
     {
@@ -35,6 +36,7 @@ Shader "Unlit/BackgroundTiling"
             
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _FrameCount;
 
             float4 _Tint;
 
@@ -60,7 +62,7 @@ Shader "Unlit/BackgroundTiling"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                float4 col = tex2D(_MainTex, flipbook(float2(i.uv.x * 15 % 1, i.uv.y * 15 % 1), float2(13, 1), (int)round(_Time.y * 20) % 13));
+                float4 col = tex2D(_MainTex, flipbook(float2(i.uv.x, i.uv.y), float2(_FrameCount, 1), (int)round(_Time.y * 20) % _FrameCount));
                 
                 return col * _Tint;
             }

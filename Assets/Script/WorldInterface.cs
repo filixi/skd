@@ -44,14 +44,14 @@ public class WorldInterface : MonoBehaviour
         prefab_basic_blade.AddComponent<BladeControl>();
         prefab_basic_blade.AddComponent<FlipbookRender>();
         prefab_basic_blade.GetComponent<Renderer>().material =
-            Instantiate(sprite_manager.entity_material_entry.array_material);
+                Resources.Load<Material>("Material/Unlit_BladeFlipBook");
 
         prefab_basic_laser = Instantiate(Resources.Load<GameObject>("Prefabs/BasicEntity"));
         prefab_basic_laser.SetActive(false);
         prefab_basic_laser.AddComponent<LaserControl>();
         prefab_basic_laser.AddComponent<FlipbookRender>();
         prefab_basic_laser.GetComponent<Renderer>().material =
-            Instantiate(sprite_manager.entity_material_entry.array_material);
+                Resources.Load<Material>("Material/Unlit_LaserFlipBook");
     }
 
     public GameObject game_data;

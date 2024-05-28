@@ -22,7 +22,7 @@ public class BladeControl : MonoBehaviour, FlipbookRenderData
         spawn_tick = tick;
         this.start = start;
         this.end = target;
-        this.speed = speed;
+        this.speed = speed / 5;
 
         gameObject.transform.position = start;
         collidedObjects.Clear();
@@ -35,7 +35,7 @@ public class BladeControl : MonoBehaviour, FlipbookRenderData
 
     public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale)
     {
-        gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.right, end - start);
+        gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.right, end - start) * Quaternion.Euler(0, 30, 0);
 
         var total_t = Vector3.Distance(start, end) / speed;
         var total_progress = (tick - spawn_tick) * 1.0f / total_t;
