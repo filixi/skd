@@ -57,12 +57,25 @@ Shader "Unlit/BackgroundTiling"
                 return frame * frame_size + uv / size;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+
+            float4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                float4 col = tex2D(_MainTex, flipbook(float2(i.uv.x * 15 % 1, i.uv.y * 15 % 1), float2(13, 1), (int)round(_Time.y * 20) % 13));
+                float2 tiling_uv = float2(i.uv.x * 15 % 1, i.uv.y * 15 % 1);
                 
-                return col * _Tint;
+                float2 index = float2((i.uv.x - 0.5) * 15, (i.uv.y - 0.5) * 15);
+                float shift = index.x * index.x + index.y * index.y;
+
+
+                float middle1 = round(_Time.y * 15) + round(shift);
+                float middle2 = round(_Time.y * 15) + round(shift + 0.5);
+
+                // sample the texture
+                float4 col1 = tex2D(_MainTex, flipbook(tiling_uv, float2(13, 1), middle1 % 13));
+                float4 col2 = tex2D(_MainTex, flipbook(tiling_uv, float2(13, 1), middle2 % 13));
+
+                return lerp(col2, col1, frac(shift));
+                
+                // return col * _Tint;
             }
             ENDCG
         }
