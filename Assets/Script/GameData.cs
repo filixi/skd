@@ -163,7 +163,7 @@ public class GameData : MonoBehaviour
         enemy_package.hp_cap = package.hp_cap;
         enemy_package.start = location;
         enemy_package.end = package.end;
-        enemy_package.speed = package.speed;
+        enemy_package.speed = package.speed * GameInstance.GetInstance().GlobalSpeedCoef();
         enemy_package.spawn_tick = Tick.tick;
 
         enemy_package.attack_range = package.attack_range;
@@ -225,18 +225,20 @@ public class GameData : MonoBehaviour
         
         var setup = GetCurrentRefreshFrag();
         int current_count = current_enemies.Count(v => v.GetComponent<RegularEnemy>().IsAlive());
-        if (current_count >= setup.total_count)
+        float game_difficuty_coef = GameInstance.GetInstance().hard_mode ? 2 : 1;
+        if (current_count >= setup.total_count * game_difficuty_coef)
             return;
 
-        if (setup.dog > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.dog / 60)
+
+        if (setup.dog > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.dog * game_difficuty_coef / 60)
             GenerateEnemyOfType(bound, 1, EnemyType.Dog, wi);
-        if (setup.standard > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.standard / 60)
+        if (setup.standard > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.standard * game_difficuty_coef / 60)
             GenerateEnemyOfType(bound, 1, EnemyType.Standard, wi);
-        if (setup.ranged > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.ranged / 60)
+        if (setup.ranged > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.ranged * game_difficuty_coef / 60)
             GenerateEnemyOfType(bound, 1, EnemyType.Ranged, wi);
-        if (setup.shield > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.shield / 60)
+        if (setup.shield > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.shield * game_difficuty_coef / 60)
             GenerateEnemyOfType(bound, 1, EnemyType.Shield, wi);
-        if (setup.special > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.special / 60)
+        if (setup.special > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.special * game_difficuty_coef / 60)
             GenerateEnemyOfType(bound, 1, EnemyType.Special, wi);
     }
 
@@ -264,8 +266,7 @@ public class GameData : MonoBehaviour
         return min.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Refresh()
     {
         foreach (var e in current_enemies)
             e.GetComponent<RegularEnemy>().Refresh(Tick.tick);
@@ -274,6 +275,12 @@ public class GameData : MonoBehaviour
 
         secret.GetComponent<RegularEnemy>().Refresh(Tick.tick);
         secret.GetComponent<FlipbookRender>().Refresh(Tick.tick);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
 }

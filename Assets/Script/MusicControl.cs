@@ -54,9 +54,10 @@ public class MusicControl : MonoBehaviour
 
         for (int i = 0; i < 40; ++i)
         {
-            fx_single_click_musics.Add(RuntimeManager.CreateInstance("event:/FX"));
-            fx_long_click_musics.Add(RuntimeManager.CreateInstance("event:/FX"));
-            fx_swip_musics.Add(RuntimeManager.CreateInstance("event:/FX"));
+            var event_path = GameInstance.GetInstance().fx_event;
+            fx_single_click_musics.Add(RuntimeManager.CreateInstance(event_path));
+            fx_long_click_musics.Add(RuntimeManager.CreateInstance(event_path));
+            fx_swip_musics.Add(RuntimeManager.CreateInstance(event_path));
         }
 
         foreach (var x in long_click_musics)

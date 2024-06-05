@@ -267,6 +267,9 @@ class KeyboardRegularControlState : IControlState
     Dictionary<KeyCode, long> up_tick = new Dictionary<KeyCode, long>();
     public void UpdateState(CameraController cc, WorldInterface wi, GameControl gc)
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            wi.OnPauseGame();
+
         List<KeyCode> keys = new List<KeyCode>();
         for (int i = 0; i < attack_key.Count; ++i)
         {
@@ -408,12 +411,30 @@ public class GameControl : MonoBehaviour
         _musicFmodCallback = new FMOD.Studio.EVENT_CALLBACK(FMODEventCallback);
 
         self = this;
-        eventInstance = RuntimeManager.CreateInstance("event:/BGM");
+        var event_path = GameInstance.GetInstance().bgm_event;
+        eventInstance = RuntimeManager.CreateInstance(event_path);
 
         eventInstance.setCallback(_musicFmodCallback,
             FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
 
         eventInstance.start();
+    }
+
+    public void FMOD_StopBGM()
+    {
+        eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
+
+    public bool FMOD_IsBGMPlaying()
+    {
+        FMOD.Studio.PLAYBACK_STATE state;
+        eventInstance.getPlaybackState(out state);
+        return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
+    }
+
+    public void FMOD_PauseBGM(bool paused)
+    {
+        eventInstance.setPaused(paused);
     }
 
     // Start is called before the first frame update

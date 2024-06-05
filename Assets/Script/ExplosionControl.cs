@@ -12,16 +12,18 @@ public class ExplosionControl : MonoBehaviour, FlipbookRenderData
     }
 
     long spawn_tick = -100000;
+    float speed = 1;
     // Update is called once per frame
-    public void Initialize(long tick)
+    public void Initialize(long tick, float speed)
     {
         spawn_tick = tick;
+        this.speed = speed;
         collidedObjects.Clear();
     }
 
     private float ComputeTotalProgress(long tick)
     {
-        return (tick - spawn_tick) / (60.0f * 0.6f);
+        return (tick - spawn_tick) / (60.0f * 0.6f / speed);
     }
     private float ComputeExpansionProgress(long tick)
     {

@@ -22,7 +22,7 @@ public class BladeControl : MonoBehaviour, FlipbookRenderData
         spawn_tick = tick;
         this.start = start;
         this.end = target;
-        this.speed = speed / 5;
+        this.speed = speed;
 
         gameObject.transform.position = start;
         collidedObjects.Clear();

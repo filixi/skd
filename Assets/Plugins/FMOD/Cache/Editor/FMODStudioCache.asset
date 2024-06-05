@@ -40,6 +40,45 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-8808895111914751807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGM.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/BGM.bank
+  Name: BGM
+  StudioPath: bank:/BGM
+  lastModified: 638531239320000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-8794754158490483483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-8400571075256394635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +121,71 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 197000
+  Length: 168000
+--- !u!114 &-8237659333534200951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/L3_Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/L3_Master.bank
+  Name: L3/L3_Master
+  StudioPath: bank:/L3_Master
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-8231271403388220292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FX/FX_Level3
+  m_EditorClassIdentifier: 
+  Path: event:/FX/FX_Level3
+  guid: 9ec62e55b6d46f4f9f157e86b8325594
+  Banks:
+  - {fileID: 3152100057497843509}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3587519703810712722}
+  - {fileID: -2105096490649337596}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-8200466449933017422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-7979978969277593417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +206,46 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-7656065689674284886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FXBank/FX_Level2.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/FXBank/FX_Level2.bank
+  Name: FXBank/FX_Level2
+  StudioPath: bank:/FX_Level2
+  lastModified: 638530922940000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-7156247875212750736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/Master.strings.bank
+  Name: L3/Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 960
+  Exists: 0
 --- !u!114 &-6840647305752295445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +286,136 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-6429322174628216219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FX/FX_Level2
+  m_EditorClassIdentifier: 
+  Path: event:/FX/FX_Level2
+  guid: 199042c6fa4eb743a8cdab853df64f79
+  Banks:
+  - {fileID: 3152100057497843509}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -5510228939099077569}
+  - {fileID: 5703285423154379968}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-6380331287930638172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FX_Level1
+  m_EditorClassIdentifier: 
+  Path: event:/FX_Level1
+  guid: 9ec62e55b6d46f4f9f157e86b8325594
+  Banks:
+  - {fileID: -3640246400728737535}
+  - {fileID: -7656065689674284886}
+  - {fileID: -4524517772282906475}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -680903623822172790}
+  - {fileID: -8200466449933017422}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-5510228939099077569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level2/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5322218970407833962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638531239340000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5134669570976108571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4524517772282906475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FXBank/FX_Level3.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/FXBank/FX_Level3.bank
+  Name: FXBank/FX_Level3
+  StudioPath: bank:/FX_Level3
+  lastModified: 638530921860000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-3764155978024790968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +431,26 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638508768680000000
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3640246400728737535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FXBank/FX_Level1.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/FXBank/FX_Level1.bank
+  Name: FXBank/FX_Level1
+  StudioPath: bank:/FX_Level1
+  lastModified: 638530923400000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -177,7 +469,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/FX.bank
   Name: FX
   StudioPath: bank:/FX
-  lastModified: 638508768680000000
+  lastModified: 638529510840000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -201,6 +493,46 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-3368395461291692145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2674068484026993886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &-2603338616133987283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +553,45 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-2210616374543986246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGMBank/BGM_Level3.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/BGMBank/BGM_Level3.bank
+  Name: BGMBank/BGM_Level3
+  StudioPath: bank:/BGM_Level3
+  lastModified: 638530921680000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-2105096490649337596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level3/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-1646613366702040061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +607,103 @@ MonoBehaviour:
   Name: InputRegion
   Min: 1
   Max: 10
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1544029373799487650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MasterBank/Master_Level3.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/MasterBank/Master_Level3.bank
+  Name: MasterBank/Master_Level3
+  StudioPath: bank:/Master_Level3
+  lastModified: 638530921860000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-1486619193616236058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MasterBank/Master_Level2.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/MasterBank/Master_Level2.bank
+  Name: MasterBank/Master_Level2
+  StudioPath: bank:/Master_Level2
+  lastModified: 638530922940000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-856650224451566644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-853307459155133793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/L3_FX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/L3_FX.bank
+  Name: L3/L3_FX
+  StudioPath: bank:/L3_FX
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-680903623822172790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
   Default: 1
   ID:
     data1: 0
@@ -281,11 +749,49 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -3382516582494815601}
-  - {fileID: 9052775193961219499}
+  - {fileID: -5134669570976108571}
+  - {fileID: 699337891799792722}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-321814644943715027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MasterBank/Master_Level1.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/MasterBank/Master_Level1.bank
+  Name: MasterBank/Master_Level1
+  StudioPath: bank:/Master_Level1
+  lastModified: 638530923400000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-103542804172810604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/L3_BGM.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/L3_BGM.bank
+  Name: L3/L3_BGM
+  StudioPath: bank:/L3_BGM
+  lastModified: 638529510820000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,19 +805,23 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 323364683261137055}
-  - {fileID: 3839551138856718122}
-  - {fileID: -3580090421321305367}
-  - {fileID: -3764155978024790968}
+  - {fileID: 6459802647814359658}
+  - {fileID: -8808895111914751807}
+  - {fileID: 3152100057497843509}
+  - {fileID: -5322218970407833962}
   EditorEvents:
-  - {fileID: -8240726808584415164}
-  - {fileID: -412684300699790397}
+  - {fileID: 3800423369108382546}
+  - {fileID: 4696126270268002575}
+  - {fileID: 3537955703546442503}
+  - {fileID: -6429322174628216219}
+  - {fileID: 7801192629211740113}
+  - {fileID: -8231271403388220292}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -3764155978024790968}
+  - {fileID: -5322218970407833962}
   StringsBanks:
-  - {fileID: 323364683261137055}
-  stringsBankWriteTime: 638508768680000000
+  - {fileID: 6459802647814359658}
+  stringsBankWriteTime: 638531239340000000
   cacheVersion: 6
 --- !u!114 &323364683261137055
 MonoBehaviour:
@@ -333,7 +843,252 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 960
+  Exists: 0
+--- !u!114 &699337891799792722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
+--- !u!114 &1069776966742567880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &1693235906272333147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/L3_Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/L3_Master.strings.bank
+  Name: L3/L3_Master.strings
+  StudioPath: bank:/L3_Master.strings
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 960
+  Exists: 0
+--- !u!114 &1753517598267135560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &1786399649372879298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1905553773492935088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &2529749528747194697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/Master.bank
+  Name: L3/Master
+  StudioPath: bank:/Master
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2555724043488051890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &3152100057497843509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/FX.bank
+  Name: FX
+  StudioPath: bank:/FX
+  lastModified: 638531239340000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3537955703546442503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/BGM_Level3
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/BGM_Level3
+  guid: 8d9f88d7c3468c4cbcb202bf21d6756f
+  Banks:
+  - {fileID: -8808895111914751807}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 168000
+--- !u!114 &3587519703810712722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level3/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3800423369108382546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/BGM_Level1
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/BGM_Level1
+  guid: 19ee63b7ca57684695c02be25b158d5d
+  Banks:
+  - {fileID: -8808895111914751807}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 197000
 --- !u!114 &3839551138856718122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,10 +1104,115 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638508768660000000
+  lastModified: 638529510820000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &4112044456135595889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MasterBank/Master_Level1.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/MasterBank/Master_Level1.strings.bank
+  Name: MasterBank/Master_Level1.strings
+  StudioPath: bank:/Master_Level1.strings
+  lastModified: 638530923400000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 996
+  Exists: 0
+--- !u!114 &4696126270268002575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/BGM_Level2
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/BGM_Level2
+  guid: 7a0553f1e00dac4897462145196cc073
+  Banks:
+  - {fileID: -8808895111914751807}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 210000
+--- !u!114 &5590303719878196147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5703285423154379968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level2/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5736808535580653788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 960
+  Exists: 0
 --- !u!114 &6162452889868850459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +1233,153 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &6459802647814359658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638531239340000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1134
+  Exists: 1
+--- !u!114 &7018993564615453446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGMBank/BGM_Level2.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/BGMBank/BGM_Level2.bank
+  Name: BGMBank/BGM_Level2
+  StudioPath: bank:/BGM_Level2
+  lastModified: 638530922940000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7087500977612089141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/FX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/FX.bank
+  Name: L3/FX
+  StudioPath: bank:/FX
+  lastModified: 638529510840000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &7097402276061905279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/L3/BGM.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/L3/BGM.bank
+  Name: L3/BGM
+  StudioPath: bank:/BGM
+  lastModified: 638529510820000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &7240047938346662842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGMBank/BGM_Level1.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Resources/SoundEffect/fmod/BGMBank/BGM_Level1.bank
+  Name: BGMBank/BGM_Level1
+  StudioPath: bank:/BGM_Level1
+  lastModified: 638530923400000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7599753276767603377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM_Level1
+  m_EditorClassIdentifier: 
+  Path: event:/BGM_Level1
+  guid: 8d9f88d7c3468c4cbcb202bf21d6756f
+  Banks:
+  - {fileID: 7240047938346662842}
+  - {fileID: 7018993564615453446}
+  - {fileID: -2210616374543986246}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 168000
+--- !u!114 &7801192629211740113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FX/FX_Level1
+  m_EditorClassIdentifier: 
+  Path: event:/FX/FX_Level1
+  guid: 7a1ec6636ce0e34dbc30eec26ce761e8
+  Banks:
+  - {fileID: 3152100057497843509}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8794754158490483483}
+  - {fileID: -3368395461291692145}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &9052775193961219499
 MonoBehaviour:
   m_ObjectHideFlags: 0

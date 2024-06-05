@@ -105,7 +105,7 @@ public class WorldInterface : MonoBehaviour
                         l,
                         scale
                     );
-        explosion.GetComponent<ExplosionControl>().Initialize(Tick.tick);
+        explosion.GetComponent<ExplosionControl>().Initialize(Tick.tick, GameInstance.GetInstance().GlobalSpeedCoef());
         explosion.transform.localScale = Vector3.zero;
         explosion.name = "Explosion";
     }
@@ -139,10 +139,10 @@ public class WorldInterface : MonoBehaviour
                         e1,
                         3
                     );
-        blade.GetComponent<BladeControl>().Initialize(Tick.tick, e1, e2, 1.0f);
+        blade.GetComponent<BladeControl>().Initialize(Tick.tick, e1, e2,
+            1.0f * GameInstance.GetInstance().GlobalSpeedCoef());
         blade.name = "Blade";
     }
-
     
 
     GameObject laser = null;
@@ -173,13 +173,82 @@ public class WorldInterface : MonoBehaviour
         laser.GetComponent<LaserControl>().Initialize(Tick.tick, e1, e2);
     }
 
+    public void OnPauseGame()
+    {
+        if (canvas == null)
+        {
+            canvas = GameObject.Find("Canvas");
+            if (canvas)
+            {
+                canvas.GetComponent<InGameMenuControl>().Initialize();
+                canvas.SetActive(false);
+            }
+        }
+        if (!canvas)
+            return;
+
+        if (canvas.activeSelf && canvas.GetComponent<InGameMenuControl>().game_state == "Pause")
+        {
+            canvas.SetActive(false);
+            game_control.GetComponent<GameControl>().FMOD_PauseBGM(false);
+            return;
+        }
+
+        if (!canvas.activeSelf)
+        {
+            canvas.SetActive(true);
+            canvas.GetComponent<InGameMenuControl>().SetGameState("Pause");
+            game_control.GetComponent<GameControl>().FMOD_PauseBGM(true);
+            return;
+        }
+    }
+
+    Int64 first_tick = -1;
+    GameObject canvas = null;
     // Update is called once per frame
     void Update()
     {
+        if (first_tick < 0)
+            first_tick = Tick.tick;
+
+        bool is_bgm_playing = game_control.GetComponent<GameControl>().FMOD_IsBGMPlaying();
+        var secret = game_data.GetComponent<GameData>().secret;
+        bool secret_destoryed = secret != null && !secret.GetComponent<RegularEnemy>().IsAlive();
+
+        if (canvas == null)
+        {
+            canvas = GameObject.Find("Canvas");
+            if (canvas)
+            {
+                canvas.GetComponent<InGameMenuControl>().Initialize();
+                canvas.SetActive(false);
+            }
+        }
+        if (canvas && secret_destoryed)
+        {
+            game_control.GetComponent<GameControl>().FMOD_StopBGM();
+            canvas.SetActive(true);
+            canvas.GetComponent<InGameMenuControl>().SetGameState("Game Over");
+            game_control.GetComponent<GameControl>().FMOD_PauseBGM(true);
+            return;
+        }
+
+        if (canvas && !is_bgm_playing && first_tick + 2 < Tick.tick)
+        {
+            game_control.GetComponent<GameControl>().FMOD_StopBGM();
+            canvas.SetActive(true);
+            canvas.GetComponent<InGameMenuControl>().SetGameState("You win!");
+            return;
+        }
+
+        if (canvas && canvas.activeSelf)
+            return;
+
         Tick.TickUpdate();
 
         var cc = GameObject.Find("MainCamera").GetComponent<CameraController>();
         game_data.GetComponent<GameData>().GenerateEnemies(cc.GetCameraBounds(), this);
+        game_data.GetComponent<GameData>().Refresh();
 
         foreach (var e in explosions)
             e.GetComponent<FlipbookRender>().Refresh(Tick.tick);
