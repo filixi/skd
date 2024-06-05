@@ -385,7 +385,10 @@ public class GameControl : MonoBehaviour
             if (name.StartsWith("Stage"))
             {
                 var number = name.Replace("Stage", "");
-                GameControl.index = Int32.Parse(number) - 1;
+                string number_x = "";
+                foreach (var v in number)
+                    number_x = number_x + v;
+                GameControl.index = Int32.Parse(number_x) - 1;
             }
             UnityEngine.Debug.LogFormat("Marker: {0}", (string)parameter.name);
         }
