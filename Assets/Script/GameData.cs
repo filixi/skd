@@ -225,7 +225,7 @@ public class GameData : MonoBehaviour
         
         var setup = GetCurrentRefreshFrag();
         int current_count = current_enemies.Count(v => v.GetComponent<RegularEnemy>().IsAlive());
-        float game_difficuty_coef = GameInstance.GetInstance().hard_mode ? 2 : 1;
+        float game_difficuty_coef = GameInstance.GetInstance().hard_mode ? 4 : 1;
         if (current_count >= setup.total_count * game_difficuty_coef)
             return;
 
