@@ -387,7 +387,12 @@ public class GameControl : MonoBehaviour
                 var number = name.Replace("Stage", "");
                 string number_x = "";
                 foreach (var v in number)
-                    number_x = number_x + v;
+                {
+                    if (char.IsDigit(v))
+                        number_x = number_x + v;
+                    else
+                        break;
+                }
                 GameControl.index = Int32.Parse(number_x) - 1;
             }
             UnityEngine.Debug.LogFormat("Marker: {0}", (string)parameter.name);
