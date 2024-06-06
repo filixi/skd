@@ -175,36 +175,34 @@ public class WorldInterface : MonoBehaviour
 
     public void OnPauseGame()
     {
-        if (canvas == null)
+        if (hud == null)
         {
-            canvas = GameObject.Find("Canvas");
-            if (canvas)
-            {
-                canvas.GetComponent<InGameMenuControl>().Initialize();
-                canvas.SetActive(false);
-            }
+            hud = GameObject.Find("Canvas");
+            if (hud)
+                hud.GetComponent<InGameMenuControl>().Initialize();
         }
-        if (!canvas)
+        if (!hud)
             return;
 
-        if (canvas.activeSelf && canvas.GetComponent<InGameMenuControl>().game_state == "Pause")
+        var mc = hud.GetComponent<InGameMenuControl>();
+        if (mc.IsMenuActive() && mc.game_state == "Pause")
         {
-            canvas.SetActive(false);
+            mc.ShowMenu(false);
             game_control.GetComponent<GameControl>().FMOD_PauseBGM(false);
             return;
         }
 
-        if (!canvas.activeSelf)
+        if (!mc.IsMenuActive())
         {
-            canvas.SetActive(true);
-            canvas.GetComponent<InGameMenuControl>().SetGameState("Pause");
+            mc.ShowMenu(true);
+            mc.SetGameState("Pause");
             game_control.GetComponent<GameControl>().FMOD_PauseBGM(true);
             return;
         }
     }
 
     Int64 first_tick = -1;
-    GameObject canvas = null;
+    GameObject hud = null;
     // Update is called once per frame
     void Update()
     {
@@ -215,34 +213,36 @@ public class WorldInterface : MonoBehaviour
         var secret = game_data.GetComponent<GameData>().secret;
         bool secret_destoryed = secret != null && !secret.GetComponent<RegularEnemy>().IsAlive();
 
-        if (canvas == null)
+        if (hud == null)
         {
-            canvas = GameObject.Find("Canvas");
-            if (canvas)
+            hud = GameObject.Find("InGameHUD");
+            if (hud)
+                hud.GetComponent<InGameMenuControl>().Initialize();
+        }
+        if (hud)
+        {
+            var mc = hud.GetComponent<InGameMenuControl>();
+
+            if (secret_destoryed)
             {
-                canvas.GetComponent<InGameMenuControl>().Initialize();
-                canvas.SetActive(false);
+                game_control.GetComponent<GameControl>().FMOD_StopBGM();
+                mc.SetGameState("Game Over");
+                mc.ShowMenu(true);
+                return;
             }
-        }
-        if (canvas && secret_destoryed)
-        {
-            game_control.GetComponent<GameControl>().FMOD_StopBGM();
-            canvas.SetActive(true);
-            canvas.GetComponent<InGameMenuControl>().SetGameState("Game Over");
-            game_control.GetComponent<GameControl>().FMOD_PauseBGM(true);
-            return;
-        }
 
-        if (canvas && !is_bgm_playing && first_tick + 2 < Tick.tick)
-        {
-            game_control.GetComponent<GameControl>().FMOD_StopBGM();
-            canvas.SetActive(true);
-            canvas.GetComponent<InGameMenuControl>().SetGameState("You win!");
-            return;
-        }
+            if (!is_bgm_playing && first_tick + 2 < Tick.tick)
+            {
+                game_control.GetComponent<GameControl>().FMOD_StopBGM();
+                mc.SetGameState("You win!");
+                mc.ShowMenu(true);
+                return;
+            }
 
-        if (canvas && canvas.activeSelf)
-            return;
+            if (mc.IsMenuActive())
+                return;
+        }
+        
 
         Tick.TickUpdate();
 

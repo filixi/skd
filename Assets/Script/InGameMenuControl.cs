@@ -18,12 +18,24 @@ public class InGameMenuControl : MonoBehaviour
         
     }
 
+    GameObject menu;
     GameObject text_game_state;
     GameObject button_continue;
     public void Initialize()
     {
+        menu = GameObject.Find("Menu");
         text_game_state = GameObject.Find("Text_GameState");
         button_continue = GameObject.Find("Button_Continue");
+        menu.SetActive(false);
+    }
+
+    public bool IsMenuActive()
+    {
+        return menu.activeSelf;
+    }
+    public void ShowMenu(bool show)
+    {
+        menu.SetActive(show);
     }
 
     public string game_state = "";
