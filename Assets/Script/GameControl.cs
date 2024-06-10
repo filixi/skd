@@ -373,6 +373,7 @@ public class GameControl : MonoBehaviour
     FMOD.Studio.EVENT_CALLBACK _musicFmodCallback;
 
     public static int index = 0;
+    public static bool switch_color = false;
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     static FMOD.RESULT FMODEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, System.IntPtr param, System.IntPtr parameterPtr)
@@ -394,6 +395,12 @@ public class GameControl : MonoBehaviour
                 }
                 GameControl.index = Int32.Parse(number_x) - 1;
             }
+
+            if (name.StartsWith("SwitchColor"))
+            {
+                GameControl.switch_color = true;
+            }
+
             UnityEngine.Debug.LogFormat("Marker: {0}", (string)parameter.name);
         }
 
@@ -424,6 +431,7 @@ public class GameControl : MonoBehaviour
         eventInstance.setCallback(_musicFmodCallback,
             FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
 
+        eventInstance.setVolume(0);
         eventInstance.start();
     }
 
@@ -500,6 +508,11 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         wi.game_data.GetComponent<GameData>().current_frag_index = index;
+        if (switch_color)
+        {
+            switch_color = false;
+            wi.SwitchRegion();
+        }
 
         control_state.UpdateState(cc, wi, this);
 
@@ -527,6 +540,8 @@ public class GameControl : MonoBehaviour
 
         if (delta_tick % interval == wi.delay_tick)
             expecting_tick = ttick + interval;
+
+        wi.music_control.GetComponent<MusicControl>().Level4Advance();
         
         bool synchronized = false;
         if ((delta_tick % interval == wi.delay_tick && ttick - last_enter_tick > 10) || (expecting_tick - ttick) % interval == 0)

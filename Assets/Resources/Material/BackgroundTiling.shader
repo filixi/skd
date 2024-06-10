@@ -37,6 +37,9 @@ Shader "Unlit/BackgroundTiling"
             float4 _MainTex_ST;
 
             float4 _Tint;
+            float _RegionA = 0;
+            float _RegionB = 0;
+            float _RegionProgress = 0;
 
             v2f vert (appdata v)
             {
@@ -63,19 +66,16 @@ Shader "Unlit/BackgroundTiling"
                 float2 tiling_uv = float2(i.uv.x * 15 % 1, i.uv.y * 15 % 1);
                 
                 float2 index = float2((i.uv.x - 0.5) * 15, (i.uv.y - 0.5) * 15);
-                float shift = index.x * index.x + index.y * index.y;
+                float distance = index.x * index.x + index.y * index.y;
+                float shift = round(abs(index.x)) * 3 + round(abs(index.y)) * 3;
 
+                float cd = clamp(round(shift) / 10, 0, 1);
+                float current_region = _RegionProgress < cd ? _RegionA : _RegionB;
 
                 float middle1 = round(_Time.y * 15) + round(shift);
-                float middle2 = round(_Time.y * 15) + round(shift + 0.5);
-
                 // sample the texture
-                float4 col1 = tex2D(_MainTex, flipbook(tiling_uv, float2(13, 1), middle1 % 13));
-                float4 col2 = tex2D(_MainTex, flipbook(tiling_uv, float2(13, 1), middle2 % 13));
-
-                return lerp(col2, col1, frac(shift));
-                
-                // return col * _Tint;
+                float4 col1 = tex2D(_MainTex, flipbook(tiling_uv, float2(13, 2), middle1 % 13 + current_region * 13));
+                return col1;
             }
             ENDCG
         }

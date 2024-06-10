@@ -10,6 +10,18 @@ public class GameInstance
         return instance;
     }
 
+    public Dictionary<string, int> success_count = new Dictionary<string, int>();
+    public void Success()
+    {
+        if (!success_count.ContainsKey(level_name))
+            success_count.Add(level_name, 0);
+        ++success_count[level_name];
+    }
+    public bool Succeed()
+    {
+        return success_count.Count > 0;
+    }
+
     public bool hard_mode
     {
         get;
@@ -29,6 +41,12 @@ public class GameInstance
     } = "";
 
     public string fx_event
+    {
+        get;
+        set;
+    } = "";
+
+    public string level_name
     {
         get;
         set;

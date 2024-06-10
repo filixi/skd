@@ -23,14 +23,24 @@ public class GameData : MonoBehaviour
     }
     List<EnemyRefreshFrag> enemy_refresh_sequence = new List<EnemyRefreshFrag>
     {
-        new EnemyRefreshFrag{ total_count = 20, dog = 1, standard = 0, ranged = 0, shield = 0, special = 0 }, // 1
-        new EnemyRefreshFrag{ total_count = 30, dog = 2, standard = 1, ranged = 0, shield = 0, special = 0 }, // 2
-        new EnemyRefreshFrag{ total_count = 40, dog = 3, standard = 2, ranged = 1, shield = 0, special = 0 }, // 3
-        new EnemyRefreshFrag{ total_count = 50, dog = 4, standard = 3, ranged = 2, shield = 1, special = 1 },
-        new EnemyRefreshFrag{ total_count = 60, dog = 5, standard = 4, ranged = 3, shield = 2, special = 2 },
-        new EnemyRefreshFrag{ total_count = 70, dog = 0, standard = 5, ranged = 4, shield = 3, special = 3 },
-        new EnemyRefreshFrag{ total_count = 80, dog = 0, standard = 0, ranged = 5, shield = 4, special = 4 },
-        new EnemyRefreshFrag{ total_count = 90, dog = 0, standard = 0, ranged = 6, shield = 0, special = 5 },
+        new EnemyRefreshFrag{ total_count = 5, dog = 0.5f, standard = 0.4f, ranged = 0, shield = 0, special = 0 }, // 1
+        new EnemyRefreshFrag{ total_count = 5, dog = 0.5f, standard = 0.4f, ranged = 0.4f, shield = 0, special = 0 }, // 2
+        new EnemyRefreshFrag{ total_count = 5, dog = 0.4f, standard = 0.3f, ranged = 0.3f, shield = 0.3f, special = 0 }, // 3
+        new EnemyRefreshFrag{ total_count = 10, dog = 1, standard = 1, ranged = 1, shield = 0.5f, special = 0 }, // 4
+        new EnemyRefreshFrag{ total_count = 15, dog = 1, standard = 2, ranged = 1, shield = 0.5f, special = 0.5f }, // 5
+        new EnemyRefreshFrag{ total_count = 15, dog = 1, standard = 1, ranged = 1, shield = 1, special = 1 }, // 6
+        new EnemyRefreshFrag{ total_count = 20, dog = 2, standard = 2, ranged = 1, shield = 0.5f, special = 0.5f }, // 7
+        new EnemyRefreshFrag{ total_count = 25, dog = 2, standard = 2, ranged = 2, shield = 1, special = 1 }, // 8
+        new EnemyRefreshFrag{ total_count = 30, dog = 2, standard = 3, ranged = 2, shield = 1, special = 1 }, // 9
+        new EnemyRefreshFrag{ total_count = 0, dog = 0, standard = 0, ranged = 0, shield = 0, special = 0 }, // 10
+        new EnemyRefreshFrag{ total_count = 3, dog = 0.5f, standard = 0.4f, ranged = 0, shield = 0, special = 0 }, // 11
+        new EnemyRefreshFrag{ total_count = 3, dog = 0.4f, standard = 0.5f, ranged = 0.5f, shield = 0, special = 0 }, // 12
+        new EnemyRefreshFrag{ total_count = 4, dog = 0.7f, standard = 0.3f, ranged = 0.5f, shield = 0, special = 0 }, // 13
+        new EnemyRefreshFrag{ total_count = 4, dog = 0.3f, standard = 0.5f, ranged = 0.3f, shield = 0.2f, special = 0 }, // 14
+        new EnemyRefreshFrag{ total_count = 5, dog = 0.4f, standard = 0.3f, ranged = 0.3f, shield = 0.3f, special = 0 }, // 15
+        new EnemyRefreshFrag{ total_count = 5, dog = 0.6f, standard = 0.8f, ranged = 0, shield = 0, special = 0 }, // 16
+        new EnemyRefreshFrag{ total_count = 5, dog = 0.7f, standard = 0.6f, ranged = 0.4f, shield = 0, special = 0 }, // 17
+        new EnemyRefreshFrag{ total_count = 8, dog = 0.3f, standard = 0.4f, ranged = 0.3f, shield = 0.2f, special = 0.1f }, // 18
     };
     public int current_frag_index = 0;
     EnemyRefreshFrag GetCurrentRefreshFrag()
@@ -170,7 +180,50 @@ public class GameData : MonoBehaviour
         enemy_package.dph = package.dph;
         enemy_package.attack_interval = package.attack_interval;
 
-        enemy.GetComponent<RegularEnemy>().Initialize(enemy_package);
+        AnimationInfo a_info = new AnimationInfo();
+        if (type == EnemyType.Dog)
+        {
+            a_info.moving_frame_count = 4;
+            a_info.moving_first_frame = 13;
+            a_info.attack_frame_count = 13;
+            enemy.GetComponent<Renderer>().material =
+                    Instantiate(Resources.Load<Material>("Material/Unlit_Dog"));
+        }
+        if (type == EnemyType.Special)
+        {
+            a_info.moving_frame_count = 8;
+            a_info.moving_first_frame = 8;
+            a_info.attack_frame_count = 5;
+            enemy.GetComponent<Renderer>().material =
+                    Instantiate(Resources.Load<Material>("Material/Unlit_Ex"));
+        }
+        if (type == EnemyType.Standard)
+        {
+            a_info.moving_frame_count = 4;
+            a_info.moving_first_frame = 4;
+            a_info.attack_frame_count = 4;
+            enemy.GetComponent<Renderer>().material =
+                    Instantiate(Resources.Load<Material>("Material/Unlit_Standard"));
+        }
+        if (type == EnemyType.Ranged)
+        {
+            a_info.moving_frame_count = 6;
+            a_info.moving_first_frame = 13;
+            a_info.attack_frame_count = 13;
+            enemy.GetComponent<Renderer>().material =
+                    Instantiate(Resources.Load<Material>("Material/Unlit_Gun"));
+        }
+        if (type == EnemyType.Shield)
+        {
+
+            a_info.moving_frame_count = 20;
+            a_info.moving_first_frame = 20;
+            a_info.attack_frame_count = 16;
+            enemy.GetComponent<Renderer>().material =
+                    Instantiate(Resources.Load<Material>("Material/Unlit_Shield"));
+        }
+
+        enemy.GetComponent<RegularEnemy>().Initialize(enemy_package, a_info);
 
         enemy.GetComponent<FlipbookRender>().Initialize(
                 wi.sprite_manager.entity_material_entry.id_mapping[package.name].render_data,
@@ -215,12 +268,26 @@ public class GameData : MonoBehaviour
             current_enemies.Add(SpawnEnemy(enemy_type, l, wi));
         }
     }
+    public long score = 10;
     public void GenerateEnemies(Bounds bound, WorldInterface wi)
     {
         if (secret == null)
         {
             secret = SpawnEnemy(EnemyType.Secret, new Vector3(0, 0, 0), wi);
             secret.AddComponent<Secret>();
+        }
+
+        if (Tick.tick % 7 == 0)
+            score = (long)(score / 1.15);
+        if (score <= 0)
+            score = 10;
+        foreach (var go in current_enemies)
+        {
+            if (go.GetComponent<RegularEnemy>().JustHit(Tick.tick))
+            {
+                wi.score += score;
+                score = score + 5;
+            }
         }
         
         var setup = GetCurrentRefreshFrag();

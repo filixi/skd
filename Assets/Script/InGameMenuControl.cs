@@ -29,6 +29,14 @@ public class InGameMenuControl : MonoBehaviour
         menu.SetActive(false);
     }
 
+    public void UpdateScore(long score)
+    {
+        var go = GameObject.Find("Score");
+        if (!go)
+            return;
+        go.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", score);
+    }
+
     public bool IsMenuActive()
     {
         return menu.activeSelf;

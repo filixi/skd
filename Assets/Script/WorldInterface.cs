@@ -201,11 +201,35 @@ public class WorldInterface : MonoBehaviour
         }
     }
 
+    private int RegionA = 0;
+    private int RegionB = 1;
+    private long BStart = -1000;
+    public void SwitchRegion()
+    {
+        var t = RegionB;
+        RegionB = RegionA;
+        RegionA = t;
+        BStart = Tick.tick;
+    }
+    void UpdateFloorRegion()
+    {
+        var bg = GameObject.Find("Background");
+        if (bg == null)
+            return;
+
+        bg.GetComponent<Renderer>().material.SetFloat("_RegionA", RegionA);
+        bg.GetComponent<Renderer>().material.SetFloat("_RegionB", RegionB);
+        bg.GetComponent<Renderer>().material.SetFloat("_RegionProgress", (Tick.tick - BStart) / 240.0f);
+    }
+
     Int64 first_tick = -1;
     GameObject hud = null;
+    public long score = 0;
     // Update is called once per frame
     void Update()
     {
+        UpdateFloorRegion();
+
         if (first_tick < 0)
             first_tick = Tick.tick;
 
@@ -222,6 +246,7 @@ public class WorldInterface : MonoBehaviour
         if (hud)
         {
             var mc = hud.GetComponent<InGameMenuControl>();
+            mc.UpdateScore(score);
 
             if (secret_destoryed)
             {
@@ -233,6 +258,9 @@ public class WorldInterface : MonoBehaviour
 
             if (!is_bgm_playing && first_tick + 2 < Tick.tick)
             {
+                if (mc.game_state != "You win!")
+                    GameInstance.GetInstance().Success();
+
                 game_control.GetComponent<GameControl>().FMOD_StopBGM();
                 mc.SetGameState("You win!");
                 mc.ShowMenu(true);

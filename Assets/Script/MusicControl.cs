@@ -42,6 +42,7 @@ public class MusicControl : MonoBehaviour
     List<EventInstance> fx_single_click_musics = new List<EventInstance>();
     List<EventInstance> fx_long_click_musics = new List<EventInstance>();
     List<EventInstance> fx_swip_musics = new List<EventInstance>();
+    List<EventInstance> fx_level4_music = new List<EventInstance>();
 
     void Start()
     {
@@ -59,6 +60,9 @@ public class MusicControl : MonoBehaviour
             fx_long_click_musics.Add(RuntimeManager.CreateInstance(event_path));
             fx_swip_musics.Add(RuntimeManager.CreateInstance(event_path));
         }
+
+        for (int i = 0; i < 8; ++i)
+            fx_level4_music.Add(RuntimeManager.CreateInstance("event:/FX/FX_Level4"));
 
         foreach (var x in long_click_musics)
             x.loop = true;
@@ -97,8 +101,57 @@ public class MusicControl : MonoBehaviour
         return GetIndex(l) == GetIndex(r);
     }
 
+    private int current_level4_index = 0;
+    private List<float> level4_parameter;
+    public bool Level4Click(Vector3 l)
+    {
+        if (GameInstance.GetInstance().level_name != "Level4")
+            return false;
+        if (level4_parameter == null)
+        {
+            level4_parameter = fx_level4_music.Select(v => 0.0f).ToList();
+            foreach (var e in fx_level4_music)
+                e.start();
+        }
+
+        for (int i = 0; i < 5; ++i)
+        {
+            var index = (current_level4_index - i + level4_parameter.Count*100) % level4_parameter.Count;
+            if (i == 0)
+                level4_parameter[index] = 2;
+            else if (level4_parameter[index] > 0)
+                level4_parameter[index] = 2;
+        }
+        ++current_level4_index;
+        current_level4_index %= level4_parameter.Count;
+        return true;
+    }
+    public void Level4Advance()
+    {
+        if (GameInstance.GetInstance().level_name != "Level4" || level4_parameter == null)
+            return;
+
+        float total_tick = 120 * 3.0f;
+        for (int i = 0; i < level4_parameter.Count; ++i)
+        {
+            level4_parameter[i] -= 1 / total_tick;
+            if (level4_parameter[i] < 0)
+                level4_parameter[i] = 0;
+        }
+
+        for (int i = 0; i < level4_parameter.Count; ++i)
+        {
+            var eve = fx_level4_music[i];
+            eve.setParameterByName(string.Format("OnOff{0}", i+1), level4_parameter[i]);
+            eve.setVolume(level4_parameter[i] > 1 ? 1.0f : level4_parameter[i]);
+        }
+    }
+
     public void SingleClickAt(Vector3 l)
     {
+        if (Level4Click(l))
+            return;
+
         var eve = fx_single_click_musics[GetIndex(l)];
 
         eve.setParameterByName("InputType", 1);
@@ -108,6 +161,8 @@ public class MusicControl : MonoBehaviour
 
     public void SwipClickAt(Vector3 l)
     {
+        if (Level4Click(l))
+            return;
         var eve = fx_swip_musics[GetIndex(l)];
 
         eve.setParameterByName("InputType", 2);
@@ -117,6 +172,8 @@ public class MusicControl : MonoBehaviour
 
     public void HoldAt(Vector3 l)
     {
+        if (Level4Click(l))
+            return;
         var eve = fx_long_click_musics[GetIndex(l)];
 
         eve.getPlaybackState(out var state);

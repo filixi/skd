@@ -35,6 +35,13 @@ public class EnemyPackage
     public string name;
 }
 
+public class AnimationInfo
+{
+    public int attack_frame_count;
+    public int moving_frame_count;
+    public int moving_first_frame;
+}
+
 public class RegularEnemy : MonoBehaviour, FlipbookRenderData
 {
     EnemyPackage package;
@@ -47,12 +54,16 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
         return package;
     }
 
-    public void Initialize(EnemyPackage package)
+
+    AnimationInfo animation_info;
+    public void Initialize(EnemyPackage package, AnimationInfo animation_info)
     {
         this.package = package;
         hp = package.hp_cap;
         current_speed = package.speed;
         accumulated_t = 0;
+
+        this.animation_info = animation_info;
     }
 
     long last_damage_taken = -10000;
@@ -73,6 +84,12 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
     public bool IsAlive()
     {
         return hp > 0;
+    }
+
+    public bool JustHit(long tick)
+    {
+        var tick_since_hit = (tick - last_damage_taken);
+        return tick_since_hit == 1;
     }
 
     public void Refresh(long tick)
@@ -97,6 +114,11 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
         transform.position = Vector3.Lerp(start, end, total_progress);
     }
 
+    public bool IsMoving(long tick)
+    {
+        return (transform.position - package.end).magnitude > 0.02;
+    }
+
     public void UpdateAnimationMatrix(ref Matrix4x4 m, long tick, float scale)
     {
         m[1, 3] = gameObject.transform.position.x > package.end.x ? 1.0f : 0.0f;
@@ -107,8 +129,26 @@ public class RegularEnemy : MonoBehaviour, FlipbookRenderData
 
         if (!IsAlive())
         {
-            var slice_progress = (tick - last_damage_taken) / (60.0f * 1);
+            var tick_since_dead = (tick - last_damage_taken);
+            var slice_progress = tick_since_dead / (60.0f * 1);
             m[1, 0] = slice_progress;
+            return;
+        }
+
+        if (animation_info.moving_frame_count <= 0)
+            return;
+
+        if (IsMoving(tick))
+        {
+            Vector4 render_data = new Vector4(1, 1, 0,
+                tick / 10 % animation_info.moving_frame_count + animation_info.moving_first_frame);
+            gameObject.GetComponent<Renderer>().material.SetVector("_Data", render_data);
+        }
+        else
+        {
+            Vector4 render_data = new Vector4(1, 1, 0,
+                tick / 10 % animation_info.attack_frame_count);
+            gameObject.GetComponent<Renderer>().material.SetVector("_Data", render_data);
         }
     }
 }
