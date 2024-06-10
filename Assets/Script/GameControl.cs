@@ -431,7 +431,6 @@ public class GameControl : MonoBehaviour
         eventInstance.setCallback(_musicFmodCallback,
             FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
 
-        eventInstance.setVolume(0);
         eventInstance.start();
     }
 

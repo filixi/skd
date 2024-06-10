@@ -292,10 +292,9 @@ public class GameData : MonoBehaviour
         
         var setup = GetCurrentRefreshFrag();
         int current_count = current_enemies.Count(v => v.GetComponent<RegularEnemy>().IsAlive());
-        float game_difficuty_coef = GameInstance.GetInstance().hard_mode ? 4 : 1;
+        float game_difficuty_coef = GameInstance.GetInstance().hard_mode ? 1 : 1;
         if (current_count >= setup.total_count * game_difficuty_coef)
             return;
-
 
         if (setup.dog > 0 && UnityEngine.Random.Range(0.0f, 1.0f) < setup.dog * game_difficuty_coef / 60)
             GenerateEnemyOfType(bound, 1, EnemyType.Dog, wi);

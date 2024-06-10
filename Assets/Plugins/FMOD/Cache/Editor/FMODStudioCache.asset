@@ -55,7 +55,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638536460680000000
+  lastModified: 638536536880000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -161,8 +161,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1765248620152641382}
-  - {fileID: 5102957719488257286}
+  - {fileID: 5655918920059493532}
+  - {fileID: -5032606630089231587}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -206,14 +206,14 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 6811916885241090662}
-  - {fileID: 1528076272734182852}
-  - {fileID: 4810245322668140909}
-  - {fileID: 2423834870757794140}
-  - {fileID: -2052836100568482429}
-  - {fileID: -5824350883283473962}
-  - {fileID: 7829728910499469241}
-  - {fileID: 3260615155719600988}
+  - {fileID: -1011582911679303122}
+  - {fileID: -2807406201911169575}
+  - {fileID: -4741622557209661170}
+  - {fileID: -2009050481299731314}
+  - {fileID: -7413474146947179661}
+  - {fileID: -6459282056506501941}
+  - {fileID: -793249677429189205}
+  - {fileID: -3563486499328737790}
   MinDistance: 0
   MaxDistance: 0
   Length: 180000
@@ -256,6 +256,26 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-7413474146947179661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff1
+  m_EditorClassIdentifier: 
+  Name: OnOff1
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-7408724448270049180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +295,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7232572620277055252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +380,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-6459282056506501941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff5
+  m_EditorClassIdentifier: 
+  Name: OnOff5
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-6429322174628216219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,8 +420,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -788756471957796109}
-  - {fileID: -1858413254776385833}
+  - {fileID: -5624572787331787239}
+  - {fileID: -1062036218795869087}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -451,7 +491,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-5630999978521680161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +512,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-5624572787331787239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level2/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-5510228939099077569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,7 +587,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638536460760000000
+  lastModified: 638536536980000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -547,6 +607,46 @@ MonoBehaviour:
   Min: 1
   Max: 3
   Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5032606630089231587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level3/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4741622557209661170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff4
+  m_EditorClassIdentifier: 
+  Name: OnOff4
+  Min: 0
+  Max: 1
+  Default: 0
   ID:
     data1: 0
     data2: 0
@@ -627,6 +727,26 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-3563486499328737790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff7
+  m_EditorClassIdentifier: 
+  Name: OnOff7
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-3382516582494815601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,6 +783,26 @@ MonoBehaviour:
   Min: 1
   Max: 3
   Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2807406201911169575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff3
+  m_EditorClassIdentifier: 
+  Name: OnOff3
+  Min: 0
+  Max: 1
+  Default: 0
   ID:
     data1: 0
     data2: 0
@@ -785,6 +925,26 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
+  Exists: 0
+--- !u!114 &-2009050481299731314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff2
+  m_EditorClassIdentifier: 
+  Name: OnOff2
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &-1860622028960005709
 MonoBehaviour:
@@ -825,7 +985,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1765248620152641382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,7 +1005,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1646613366702040061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,6 +1063,46 @@ MonoBehaviour:
   lastModified: 638530922940000000
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &-1062036218795869087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level2/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1011582911679303122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff6
+  m_EditorClassIdentifier: 
+  Name: OnOff6
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &-856650224451566644
 MonoBehaviour:
@@ -966,6 +1166,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 64000
+--- !u!114 &-793249677429189205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level4/OnOff8
+  m_EditorClassIdentifier: 
+  Name: OnOff8
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-788756471957796109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +1205,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-680903623822172790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1344,7 @@ MonoBehaviour:
   - {fileID: -5322218970407833962}
   StringsBanks:
   - {fileID: 6459802647814359658}
-  stringsBankWriteTime: 638536460760000000
+  stringsBankWriteTime: 638536536980000000
   cacheVersion: 6
 --- !u!114 &106301131554810951
 MonoBehaviour:
@@ -1229,7 +1449,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &1693235906272333147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,6 +1511,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &1824395257049202961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &1905553773492935088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,7 +1570,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &2524607967434323154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1425,7 +1665,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/FX.bank
   Name: FX
   StudioPath: bank:/FX
-  lastModified: 638536460760000000
+  lastModified: 638536536980000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1448,7 +1688,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &3537955703546442503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1663,7 +1903,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &4813738843325542561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,6 +1924,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &5060647695963911182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level1/Inst
+  m_EditorClassIdentifier: 
+  Name: Inst
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &5102957719488257286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,7 +1963,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &5590303719878196147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1715,6 +1975,26 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/FX/InputType
+  m_EditorClassIdentifier: 
+  Name: InputType
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5655918920059493532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FX_Level3/InputType
   m_EditorClassIdentifier: 
   Name: InputType
   Min: 1
@@ -1804,7 +2084,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &6162452889868850459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1840,7 +2120,7 @@ MonoBehaviour:
   Path: Assets/Resources/SoundEffect/fmod/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638536460760000000
+  lastModified: 638536536980000000
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -1865,7 +2145,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &6868215505425394827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,8 +2347,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -7408724448270049180}
-  - {fileID: 6142850476892659799}
+  - {fileID: 5060647695963911182}
+  - {fileID: 1824395257049202961}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -2091,7 +2371,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &9052775193961219499
 MonoBehaviour:
   m_ObjectHideFlags: 0

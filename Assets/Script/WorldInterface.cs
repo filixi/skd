@@ -231,7 +231,10 @@ public class WorldInterface : MonoBehaviour
         UpdateFloorRegion();
 
         if (first_tick < 0)
+        {
             first_tick = Tick.tick;
+            GameObject.Find("StartHint").GetComponent<HintControl>().StartAnimation();
+        }
 
         bool is_bgm_playing = game_control.GetComponent<GameControl>().FMOD_IsBGMPlaying();
         var secret = game_data.GetComponent<GameData>().secret;

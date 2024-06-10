@@ -9,9 +9,14 @@ using FMODUnity;
 public class MainMenuControl : MonoBehaviour
 {
     // Start is called before the first frame update
+    GameObject level_menu;
+    GameObject main_menu;
     void Start()
     {
-        
+        level_menu = GameObject.Find("LevelMenu");
+        main_menu = GameObject.Find("MainMenu");
+
+        level_menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,8 +38,8 @@ public class MainMenuControl : MonoBehaviour
         if (bgm != null)
         {
             bgm.Value.getPlaybackState(out var state);
-            if (state == PLAYBACK_STATE.STOPPED)
-                bgm.Value.start();
+            //if (state == PLAYBACK_STATE.STOPPED)
+            //    bgm.Value.start();
         }
 
         AddWidget(GameObject.Find("Level2"));
@@ -42,8 +47,8 @@ public class MainMenuControl : MonoBehaviour
         AddWidget(GameObject.Find("Level4"));
         AddWidget(GameObject.Find("HardMode"));
 
-        foreach (var go in widgets)
-            go.SetActive(GameInstance.GetInstance().Succeed());
+        //foreach (var go in widgets)
+        //    go.SetActive(GameInstance.GetInstance().Succeed());
     }
 
     public void StartLevel1()
@@ -51,7 +56,7 @@ public class MainMenuControl : MonoBehaviour
         var gi = GameInstance.GetInstance();
         gi.hard_mode = IsHardMode();
         gi.slow_mode = false;
-        gi.bgm_event = "event:/BGM/BGM_Level1";
+        gi.bgm_event = gi.hard_mode ? "event:/BGM/BGM_Level1" : "event:/BGM/BGM_Level1_Simple";
         gi.fx_event = "event:/FX/FX_Level1";
         gi.level_name = "Level1";
 
@@ -65,7 +70,7 @@ public class MainMenuControl : MonoBehaviour
         var gi = GameInstance.GetInstance();
         gi.hard_mode = IsHardMode();
         gi.slow_mode = false;
-        gi.bgm_event = "event:/BGM/BGM_Level2";
+        gi.bgm_event = gi.hard_mode ? "event:/BGM/BGM_Level2" : "event:/BGM/BGM_Level2_Simple";
         gi.fx_event = "event:/FX/FX_Level2";
         gi.level_name = "Level2";
 
@@ -79,7 +84,7 @@ public class MainMenuControl : MonoBehaviour
         var gi = GameInstance.GetInstance();
         gi.hard_mode = IsHardMode();
         gi.slow_mode = false;
-        gi.bgm_event = "event:/BGM/BGM_Level3";
+        gi.bgm_event = gi.hard_mode ? "event:/BGM/BGM_Level3" : "event:/BGM/BGM_Level3_Simple";
         gi.fx_event = "event:/FX/FX_Level3";
         gi.level_name = "Level3";
 
@@ -111,5 +116,23 @@ public class MainMenuControl : MonoBehaviour
         if (toggle == null)
             return false;
         return toggle.isOn;
+    }
+
+    public void StartMenu()
+    {
+        level_menu.SetActive(true);
+        main_menu.SetActive(false);
+    }
+
+    public void Back()
+    {
+
+        level_menu.SetActive(false);
+        main_menu.SetActive(true);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
