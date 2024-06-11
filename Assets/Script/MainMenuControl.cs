@@ -47,8 +47,8 @@ public class MainMenuControl : MonoBehaviour
         AddWidget(GameObject.Find("Level4"));
         AddWidget(GameObject.Find("HardMode"));
 
-        //foreach (var go in widgets)
-        //    go.SetActive(GameInstance.GetInstance().Succeed());
+        foreach (var go in widgets)
+            go.SetActive(GameInstance.GetInstance().Succeed());
     }
 
     public void StartLevel1()
